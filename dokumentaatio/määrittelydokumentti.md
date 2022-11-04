@@ -7,7 +7,7 @@
 
 ## Aihe
 
-Tarkoituksena on luoda Markovin ketjujen avulla toimiva koneoppimisalgoritmi, joka muodostaa uusia lauseita syötetyn tekstin perusteella. Ohjelmalle syötetty teksti tallennetaan sanoina itse totetutettuun trie-tietorakenteeseen. Markovin ketjun asteluku määritetään datan syötön yhteydessä.
+Tarkoituksena on luoda Markovin ketjujen avulla toimiva koneoppimisalgoritmi, joka muodostaa uusia lauseita syötetyn tekstin perusteella. Ohjelmalle syötetty teksti tallennetaan sanoina itse toteutettuun trie-tietorakenteeseen. Markovin ketjun asteluku määritetään datan syötön yhteydessä.
 
 Valitsin kyseisen aiheen, koska en ole toteuttanut mitään vastaavaa ja se vaikuttaa kiinnostavalta.
 
