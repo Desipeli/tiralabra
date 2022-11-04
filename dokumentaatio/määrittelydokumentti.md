@@ -39,6 +39,6 @@ Yksinkertainen esimerkki miten ohjelma toimisi 2.asteen ketjulla:
 
 ## Lähteet
 
-[https://en.wikipedia.org/wiki/Trie](https://en.wikipedia.org/wiki/Trie)
-[https://en.wikipedia.org/wiki/Markov_chain](https://en.wikipedia.org/wiki/Markov_chain)
-[https://www.youtube.com/watch?v=i3AkTO9HLXo&t=193s&ab_channel=NormalizedNerd](https://www.youtube.com/watch?v=i3AkTO9HLXo&t=193s&ab_channel=NormalizedNerd)
+- [https://en.wikipedia.org/wiki/Trie](https://en.wikipedia.org/wiki/Trie)
+- [https://en.wikipedia.org/wiki/Markov_chain](https://en.wikipedia.org/wiki/Markov_chain)
+- [https://www.youtube.com/watch?v=i3AkTO9HLXo&t=193s&ab_channel=NormalizedNerd](https://www.youtube.com/watch?v=i3AkTO9HLXo&t=193s&ab_channel=NormalizedNerd)
