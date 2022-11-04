@@ -3,7 +3,7 @@
 - Dokumentaation kieli: suomi
 - Opinto-ohjelma: tietojenkäsittelytieteen kandidaatti
 - Projekti toteutetaan pythonilla
-- Vertaisarvioitavat projektit mielellään pythonilla toteutettuja
+- Vertaisarvioitavaksi mielellään pythonilla toteutettuja projekteja
 
 ## Aihe
 
