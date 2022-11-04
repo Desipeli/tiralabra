@@ -1,9 +1,9 @@
 # Määrittelydokumentti
 
-Dokumentaation kieli: suomi
-Opinto-ohjelma: tietojenkäsittelytieteen kandidaatti
-Projekti toteutetaan pythonilla
-Vertaisarvioitavat projektit mielellään pythonilla toteutettuja
+- Dokumentaation kieli: suomi
+- Opinto-ohjelma: tietojenkäsittelytieteen kandidaatti
+- Projekti toteutetaan pythonilla
+- Vertaisarvioitavat projektit mielellään pythonilla toteutettuja
 
 ## Aihe
 
