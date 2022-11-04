@@ -11,9 +11,13 @@ Tarkoituksena on luoda Markovin ketjujen avulla toimiva koneoppimisalgoritmi, jo
 
 Valitsin kyseisen aiheen, koska en ole toteuttanut mitään vastaavaa ja se vaikuttaa kiinnostavalta.
 
+## Markovin ketju
+
+Projektissani hyödyntämä Markovin ketju toimii siten, että lauseita muodostettaessa uusi lisättävä sana riippuu vain tietystä määrästä (aste) aikaisempia sanoja. Jos on useampia vaihtoehtoja valita seuraava sana, arvotaan se mahdollisista vaihtoehdoista esiintymistiheyden perusteella.
+
 ## Trie
 
-Trie-tietorakenne on puu, jonka jokaisella solmulla voi olla mielivaltainen määrä lapsisolmuja. Solmuissa on linkki niiden lapsisolmuihin, sekä tieto siitä, kuinka monta kertaa kyseisen solmun avain on esiintynyt. Markovin ketjun aste määrää puun syvyyden: aste + 1. Esimerkki: toisen asteen ketjua varten on tallennettava kolmen sanan jonoja, sillä kolmas sana riippuu kahdesta edellisestä.
+Trie-tietorakenne on puu, jonka jokaisella solmulla voi olla mielivaltainen määrä lapsisolmuja. Solmuissa on linkki niiden lapsisolmuihin, sekä tieto siitä, kuinka monta kertaa kyseisen solmun arvo (sana) on esiintynyt. Tässä projektissa trieen tallennetaan sanoista koostuvia listoja siten, että listan ensimmäinen sana tallennetaan juuren lapsisolmuksi, seuraava sen lapsisolmuksi ja niin edelleen. Jos sana löytyy jo lapsisolmusta, ei luoda uutta solmua vaan kasvatetaan olemassa olevan solmun sanan esiintymisen lukumäärää mittaavan muuttujan arvoa. Markovin ketjun aste määrää puun syvyyden: aste + 1. Esimerkki: toisen asteen ketjua varten on tallennettava kolmen sanan jonoja, sillä kolmas sana riippuu kahdesta edellisestä.
 
 Tilavaativuus: O(n)
 - Kaikki syötteen sanat tallennettaan Trieen pahimmillaan (aste + 1) * n kertaa
@@ -23,10 +27,6 @@ Aikavaativuudet:
 - Lisäys: O(n), jossa n on lisättävien sanojen määrä
 - Haku: O(n), jossa n on puun syvyys
 - solmun poisto: O(n)
-
-## Markovin ketju
-
-Projektissani hyödyntämä Markovin ketju toimii siten, että lauseita muodostettaessa uusi lisättävä sana riippuu vain tietystä määrästä(aste) aikaisempia sanoja. Jos on useampia vaihtoehtoja valita seuraava sana, arvotaan se mahdollisista vaihtoehdoista perustuen esiintymistiheyteen.
 
 ## Ohjelman toimintaidea
 
