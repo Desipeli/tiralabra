@@ -31,7 +31,7 @@ Projektissani hyödyntämä Markovin ketju toimii siten, että lauseita muodoste
 ## Ohjelman toimintaidea
 
 Yksinkertainen esimerkki miten ohjelma toimisi 2.asteen ketjulla:
-Ohjelmalle syötetty data (sanoja): A B B A B C A B C
+- Ohjelmalle syötetty data (sanoja): A B B A B C A B C
 - Valitaan arpomalla mikä tahansa sana: saadaan esimerkiksi B todennäköisyydellä 4/9.
 - Valittu B. Nyt voidaan valita mikä tahansa sana, joka esiintyy syötteessä B:n jälkeen. Valitaan A todennäköisyydellä 1/4.
 - Valittu B A. Nyt ainoa vaihtoehto on lisätä perään B, sillä syötteessä esiintyy B A vain yhdessä kohtaa.
