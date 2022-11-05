@@ -5,7 +5,7 @@ käytetty tuntimäärä n. 11
 ### Mitä olen tehnyt tällä viikolla?
 
 - Repo luotu
-- Aiheeseen tutustumista ja tiedonetsintää netistä.
+- Aiheeseen tutustumista ja tiedon etsintää netistä.
 - Määrittelydokumentti
 - Python-projekti aloitettu ja poetry otettu käyttöön
 - Trieä ja ohjelmaa hahmoteltu koodissa
@@ -29,6 +29,6 @@ En ole vielä aivan varma mikä olisi fiksuin tapa toteuttaa valittavan sanan ar
 
 - Trie valmiiksi ja sille testit
 - Parseri omaan tiedostoon/luokkaan ja sille testit
-- Käyttöliittymän muokkaaminen sellaiseksi, että ohjelmaa on helpompi testata. Eli tulostuksen ja syötteiden lukeminen omaan luokkaan.
-- Kommentoimaan kaikki tarvittava koodissa
+- Käyttöliittymän muokkaaminen sellaiseksi, että ohjelmaa on helpompi testata. Eli tulostaminen ja syötteiden lukeminen omaan luokkaan.
+- Kommentoin kaikki tarvittavat kohdat koodissa
 - 
