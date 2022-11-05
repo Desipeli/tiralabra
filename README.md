@@ -1,4 +1,4 @@
-# tiralabra
+# Lausegeneraattori
 Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit
 
 ## Dokumentaatio
