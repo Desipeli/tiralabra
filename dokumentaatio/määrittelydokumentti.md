@@ -19,9 +19,9 @@ Projektissani hyödyntämä Markovin ketju toimii siten, että lauseita muodoste
 
 Trie-tietorakenne on puu, jonka jokaisella solmulla voi olla mielivaltainen määrä lapsisolmuja. Solmuissa on linkki niiden lapsisolmuihin, sekä tieto siitä, kuinka monta kertaa kyseisen solmun arvo (sana) on esiintynyt. Tässä projektissa trieen tallennetaan sanoista koostuvia listoja siten, että listan ensimmäinen sana tallennetaan juuren lapsisolmuksi, seuraava sen lapsisolmuksi ja niin edelleen. Jos sana löytyy jo lapsisolmusta, ei luoda uutta solmua vaan kasvatetaan olemassa olevan solmun sanan esiintymisen lukumäärää mittaavan muuttujan arvoa. Markovin ketjun aste määrää puun syvyyden: aste + 1. Esimerkki: toisen asteen ketjua varten on tallennettava kolmen sanan jonoja, sillä kolmas sana riippuu kahdesta edellisestä.
 
-Tilavaativuus: O(n)
+Tilavaativuus: O(mn), jossa m = aste + 1.
 - Kaikki syötteen sanat tallennettaan Trieen pahimmillaan (aste + 1) * n kertaa
-    - Tässä siis aste voi olla myös nolla, jolloin sanat olisivat riippumattomia toisistaan
+    - Tässä siis aste voi olla myös nolla, jolloin sanat olisivat riippumattomia toisistaan.
 
 Aikavaativuudet:
 - Lisäys: O(n), jossa n on lisättävien sanojen määrä
