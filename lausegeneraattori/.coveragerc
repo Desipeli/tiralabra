@@ -1,2 +1,8 @@
 [run]
 source = src
+omit = 
+    src/tests/**,
+    src/arpa.py,
+    src/konsoli.py,
+    src/tiedostonlukija.py,
+    src/tietorakenteet/tests/**
