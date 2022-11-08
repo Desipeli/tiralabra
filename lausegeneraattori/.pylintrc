@@ -1,6 +1,6 @@
 [MASTER]
 
-ignore=tests,index.py
+ignore=tests,index.py,*test.py
 
 [MESSAGE CONTROL]
 
@@ -18,7 +18,7 @@ disable=raw-checker-failed,
 
 [FORMAT]
 
-max-line-length: 80
+max-line-length: 100
 
 [REFACTORING]
 
