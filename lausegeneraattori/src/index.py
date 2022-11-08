@@ -2,6 +2,7 @@ import os.path
 from tietorakenteet.trie import Trie
 from konsoli import Konsoli
 from tiedostonlukija import TiedostonLukija
+from jasennin import Jasennin
 from arpa import Arpa
 
 
@@ -37,6 +38,7 @@ def laheta_trielle(trie, lista):
 def ohjelma():
     io = Konsoli()
     tiedoston_lukija = TiedostonLukija()
+    jasennin = Jasennin()
     trie = Trie(Arpa())
     aste = 2
     paavalikon_ohjeet()
@@ -54,7 +56,8 @@ def ohjelma():
                 io.kirjoita("Syötä vain positiivisia kokonaislukuja tai 0")
                 continue
         elif syote == "2":
-            print(tiedoston_lukija.lue("dracula.txt"))
+            tiedoston_sisalto = tiedoston_lukija.lue("dracula.txt")
+            print(jasennin.jasenna_listaksi(tiedoston_sisalto))
         elif syote == "3":
             io.kirjoita("lause")
         elif syote == "q":
