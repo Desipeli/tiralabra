@@ -143,3 +143,20 @@ class TestTrie(unittest.TestCase):
 
         loydetty_sana = self.trie2.hae(["yksi"])
         self.assertAlmostEqual(loydetty_sana, "kolme")
+
+    def test_haku_tyhjaan_trien_juureen(self):
+        loydetty_sana = self.trie.hae([])
+
+        self.assertAlmostEqual(None, loydetty_sana)
+
+    def test_haku_solmuun_jolla_ei_ole_lapsia(self):
+        self.trie.lisaa_sanalista(["yksi", "kaksi"])
+        loydetty_sana = self.trie.hae(["yksi", "kaksi"])
+
+        self.assertAlmostEqual(loydetty_sana, None)
+
+    def test_haku_solmuun_jolla_ei_ole_lapsia_ja_listaa_on_viela_jaljella(self):
+        self.trie.lisaa_sanalista(["yksi"])
+        loydetty_sana = self.trie.hae(["yksi", "kaksi"])
+
+        self.assertAlmostEqual(loydetty_sana, None)
