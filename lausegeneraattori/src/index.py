@@ -1,5 +1,7 @@
 import os.path
 from trie.trie import Trie
+from konsoli import Konsoli
+from tiedostonlukija import TiedostonLukija
 
 
 def paavalikon_ohjeet():
@@ -8,10 +10,10 @@ def paavalikon_ohjeet():
     print("3: tuota lause!")
     print("q: lopeta")
 
-def lue_tiedosto(tiedosto):
-    sisalto = open(os.path.dirname(__file__)+"/data/"+tiedosto, "r")
-    parsetettu = sisalto.read().replace("\n", " ").replace(".", " .").replace(",", " ,").replace("!", " !").replace("?", " ?").split()
-    print(parsetettu)
+# def lue_tiedosto(tiedosto):
+#     sisalto = open(os.path.dirname(__file__)+"/data/"+tiedosto, "r")
+#     parsetettu = sisalto.read().replace("\n", " ").replace(".", " .").replace(",", " ,").replace("!", " !").replace("?", " ?").split()
+#     print(parsetettu)
 
 def pilko_syotettava_data_asteen_mukaisesti(data, aste):
     if aste > len(data):
@@ -26,25 +28,27 @@ def pilko_syotettava_data_asteen_mukaisesti(data, aste):
         print()
 
 def ohjelma():
+    io = Konsoli()
+    tiedoston_lukija = TiedostonLukija()
     aste = 2
     paavalikon_ohjeet()
 
     while True:
-        syote = input("toiminto: ")
+        syote = io.lue("toiminto: ")
 
         if syote == "1":
-            uusi_aste = input("Aseta uusi aste (tiedostot ladattava uudestaan): ")
+            uusi_aste = io.lue("Aseta uusi aste (tiedostot ladattava uudestaan): ")
             try:
                 uusi_aste_numerona = int(uusi_aste)
                 if uusi_aste_numerona >= 0:
                     aste = uusi_aste_numerona
             except:
-                print("Syötä vain positiivisia kokonaislukuja tai 0")
+                io.kirjoita("Syötä vain positiivisia kokonaislukuja tai 0")
                 continue
         elif syote == "2":
-            lue_tiedosto("dracula.txt")
+            print(tiedoston_lukija.lue("dracula.txt"))
         elif syote == "3":
-            print("lause")
+            io.kirjoita("lause")
         elif syote == "q":
             break
         else:
