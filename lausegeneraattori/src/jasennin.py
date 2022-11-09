@@ -6,7 +6,7 @@ class Jasennin:
 
     Parametrit:
         teksti: Merkkijono jota käsitellään
-    
+
     Palauttaa listan sanoista ja välimerkeistä
     """
 
