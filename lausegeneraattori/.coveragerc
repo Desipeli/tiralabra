@@ -5,4 +5,5 @@ omit =
     src/arpa.py,
     src/konsoli.py,
     src/tiedostonlukija.py,
-    src/tietorakenteet/tests/**
+    src/tietorakenteet/tests/**,
+    src/index.py
