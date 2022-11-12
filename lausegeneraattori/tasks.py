@@ -7,3 +7,7 @@ def start(ctx):
 @task
 def testcov(ctx):
     ctx.run("coverage run --branch -m pytest; coverage html", pty=True)
+
+@task
+def lint(ctx):
+    ctx.run("pylint src", pty=True)
