@@ -1,6 +1,6 @@
 # Viikko 1
 
-käytetty tuntimäärä n. 11
+käytetty tuntimäärä n. 14
 
 ### Mitä olen tehnyt tällä viikolla?
 
