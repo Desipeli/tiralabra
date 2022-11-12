@@ -5,7 +5,13 @@ class Trie:
     """ Trie-tietorakenne"""
 
     def __init__(self, arpa) -> None:
-        """ Konstruktori. Luodaan juurisolmu """
+        """
+        Konstruktori, luodaan juurisolmu.
+
+        Parametrit:
+            arpa: satunnaislukugeneraattori
+
+        """
         self._arpa = arpa
         self.root = TrieSolmu("")
 
