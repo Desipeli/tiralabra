@@ -37,6 +37,7 @@ class Ohjelma:
         self._konsoli.kirjoita("3: tulosta lause")
         self._konsoli.kirjoita("q: lopeta")
         self._konsoli.kirjoita("t: tulosta trie")
+        self._konsoli.kirjoita("h: päävalikon vaihtoehdot")
 
     def kaynnista(self):
         """
@@ -57,6 +58,8 @@ class Ohjelma:
             elif syote == "t":
                 self._konsoli.kirjoita(self._trie.syvyyspuu())
                 self._konsoli.kirjoita(len(self._trie.syvyyspuu()))
+            elif syote == "h":
+                self._paavalikon_ohjeet()
             elif syote == "q":
                 break
 
@@ -70,18 +73,15 @@ class Ohjelma:
         except ValueError:
             self._konsoli.kirjoita("virhe: syötteen oltava kokonaisluku")
             self._konsoli.kirjoita("astetta ei vaihdettu")
-            self._paavalikon_ohjeet()
             return
 
         if syote < 0 or syote == self._aste:
             self._konsoli.kirjoita("astetta ei vaihdettu")
-            self._paavalikon_ohjeet()
         else:
             self._trie = Trie(self._arpa)
             self._aste = syote
             self._konsoli.kirjoita(f"aste vaihdettu: {self._aste}")
             self._konsoli.kirjoita("syötteet ladattava uudestaan")
-            self._paavalikon_ohjeet()
 
     def _lataa_tiedosto(self):
         """
@@ -90,9 +90,10 @@ class Ohjelma:
         """
         tiedoston_nimi = self._konsoli.lue("tiedoston nimi: ")
         sisalto = self._tiedostonlukija.lue(tiedoston_nimi)
-        lista = self._jasennin.jasenna_listaksi(sisalto)
-        self._pilko_ja_laheta_trielle(lista)
-        self._paavalikon_ohjeet()
+        if sisalto:
+            lista = self._jasennin.jasenna_listaksi(sisalto)
+            self._pilko_ja_laheta_trielle(lista)
+            self._konsoli.kirjoita(f"{tiedoston_nimi} ladattu")
 
     def _pilko_ja_laheta_trielle(self, data):
         """
