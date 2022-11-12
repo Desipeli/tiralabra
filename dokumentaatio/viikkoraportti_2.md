@@ -37,3 +37,4 @@ Tällä hetkellä kaikki selvää
 - Aloitan testausdokumentin kirjoittamisen
 - Ainakin jonkinlainen toimiva versio lauseen muodostuksesta trien avulla
 - Aloitan integraatiotestauksen
+- Käyttöohje
