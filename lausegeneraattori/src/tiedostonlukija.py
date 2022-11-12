@@ -12,9 +12,16 @@ class TiedostonLukija:
 
     """
 
-    def lue(self, tiedosto):
-        sisalto = open(os.path.dirname(__file__)+"/data/"+tiedosto,
-        "r",
-        encoding="UTF-8").read()
+    def lue(self, tiedoston_nimi):
+        sisalto = ""
+        try:
+            with open(
+                os.path.dirname(__file__)+"/data/"+tiedoston_nimi,
+                "r",
+                encoding="UTF-8") as tiedosto:
+
+                sisalto = tiedosto.read()
+        except FileNotFoundError as error:
+            print(error)
 
         return sisalto
