@@ -2,12 +2,20 @@ import unittest
 from tietorakenteet.trie import Trie
 
 class StubArpa1:
-    def arvo(self, a, b):
+    def arvo_kokonaisluku(self, a, b):
         return 1
 
+    def arvo_joukosta(self, joukko):
+        lista = list(joukko)
+        return lista[0]
+
 class StubArpa2:
-    def arvo(self, a, b):
+    def arvo_kokonaisluku(self, a, b):
         return 2
+
+    def arvo_joukosta(self, joukko):
+        lista = list(joukko)
+        return lista[1]
 
 class TestTrie(unittest.TestCase):
     def setUp(self) -> None:
