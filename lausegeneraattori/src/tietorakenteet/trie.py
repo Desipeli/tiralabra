@@ -1,3 +1,4 @@
+from string import punctuation
 from .trie_solmu import TrieSolmu
 
 
@@ -112,7 +113,7 @@ class Trie:
             None jos solmulla ei ole lapsia
             TrieSolmun, jonka sana välitetään eteepäin
         """
-        arvonta = self._arpa.arvo(0, solmu.lapsien_lukumaara)
+        arvonta = self._arpa.arvo_kokonaisluku(0, solmu.lapsien_lukumaara)
         lapikaynti = 0
         uusi_solmu = None
         for lapsisolmu in solmu.lapset.values():
@@ -121,6 +122,37 @@ class Trie:
                 uusi_solmu = lapsisolmu
                 break
         return uusi_solmu
+
+    def hae_sana_juuresta_isolla_alkukirjaimella(self):
+        """
+        Haetaan juuresta isolla alkukirjaimella alkava sana
+
+        Arvotaan jokin sana. Jos se on välimerkki tai alkaa
+        pienellä alkukirjaimella, käydään juuren lapsisolmuja
+        niin kauan läpi, että löytyy isolla kirjaimella alkava.
+        Jos ei löydy, palautetaan ensimmäisenä löytynyt.
+
+        Satunnaisuuden varmistamiseksi aloitetaan läpikäynti
+        ensimmäiseksi valitusta sanasta.
+        """
+
+        valittu_sana = self._arpa.arvo_joukosta(self.root.lapset)
+        valittu_sana_loydetty = False
+        if valittu_sana[0].isupper():
+            return valittu_sana
+        for sana in self.root.lapset:
+            if sana == valittu_sana:
+                valittu_sana_loydetty = True
+            if valittu_sana_loydetty:
+                if sana[0].isupper():
+                    return sana
+
+        for sana in self.root.lapset:
+            if sana == valittu_sana:
+                return valittu_sana
+            if sana[0].isupper():
+                return sana
+
 
     def syvyyspuu(self):
         """ Pyydetään trieltä syvyyspuu listana """
