@@ -137,22 +137,29 @@ class Trie:
         """
 
         valittu_sana = self._arpa.arvo_joukosta(self.root.lapset)
-        valittu_sana_loydetty = False
+
+        if not valittu_sana:
+            return None
         if valittu_sana[0].isupper():
             return valittu_sana
+
+        aikaisemmat_sanat = []
+        valittu_sana_loydetty = False
         for sana in self.root.lapset:
             if sana == valittu_sana:
                 valittu_sana_loydetty = True
+                aikaisemmat_sanat.append(sana)
             if valittu_sana_loydetty:
                 if sana[0].isupper():
                     return sana
+            else:
+                aikaisemmat_sanat.append(sana)
 
-        for sana in self.root.lapset:
-            if sana == valittu_sana:
-                return valittu_sana
+        for sana in aikaisemmat_sanat:
             if sana[0].isupper():
                 return sana
 
+        return valittu_sana
 
     def syvyyspuu(self):
         """ Pyydetään trieltä syvyyspuu listana """
