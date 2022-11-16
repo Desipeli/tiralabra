@@ -15,6 +15,8 @@ class Arpa:
             valinta = choice(list(alkiot))
         except IndexError as error:
             print(error)
+            return None
         except TypeError as error:
             print(error)
+            return None
         return valinta
