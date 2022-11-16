@@ -6,6 +6,13 @@ class TestJasennin(unittest.TestCase):
     def setUp(self) -> None:
         self.jasennin = Jasennin()
 
+    # Teksti listaksi
+
+    def test_jasenna_tyhja_merkkijono(self):
+        jasennetty = self.jasennin.jasenna_listaksi("")
+
+        self.assertAlmostEqual(jasennetty, [])
+
     def test_jasenna_simppelia_tekstia(self):
         jasennetty = self.jasennin.jasenna_listaksi(
             "Olipa kerran synkkä ja myrskyinen yö"
@@ -68,3 +75,29 @@ class TestJasennin(unittest.TestCase):
         self.assertAlmostEqual(jasennetty,
             [".", "?", "aaa", ".", ".", ",", "o", "?", "o"]
         )
+
+    # Lista tekstiksi
+
+    def test_tekstiksi_tyhja_lista(self):
+        jasennetty = self.jasennin.jasenna_tekstiksi([])
+
+        self.assertAlmostEqual(jasennetty, "")
+
+    def test_tekstiksi_yksi_sana(self):
+        jasennetty = self.jasennin.jasenna_tekstiksi(["sana"])
+
+        self.assertAlmostEqual(jasennetty, "sana")
+
+    def test_tekstiksi_monta_sanaa(self):
+        jasennetty = self.jasennin.jasenna_tekstiksi(
+            ["Olipa", "kerran", "synkkä", "ja"]
+        )
+
+        self.assertAlmostEqual(jasennetty, "Olipa kerran synkkä ja")
+
+    def test_tekstiksi_sanoja_ja_valimerkkeja(self):
+        jasennetty = self.jasennin.jasenna_tekstiksi(
+            ["!", "jaa", "?", "?", "juu", ","]
+        )
+
+        self.assertAlmostEqual(jasennetty, "! jaa?? juu,")
