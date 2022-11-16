@@ -132,8 +132,9 @@ class Trie:
         niin kauan läpi, että löytyy isolla kirjaimella alkava.
         Jos ei löydy, palautetaan ensimmäisenä löytynyt.
 
-        Satunnaisuuden varmistamiseksi aloitetaan läpikäynti
-        ensimmäiseksi valitusta sanasta.
+        Aloitetaan läpikäynti ensimmäiseksi valitusta sanasta.
+        Jos päästään loppuun, aloitetaan alusta kunnes päästään
+        taas ensimmäisenä valittuun sanaan ja palautetaan se.
         """
 
         valittu_sana = self._arpa.arvo_joukosta(self.root.lapset)
