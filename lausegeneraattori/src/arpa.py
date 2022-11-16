@@ -1,6 +1,11 @@
 from random import randint
+from random import choice
 
 
 class Arpa:
-    def arvo(self, a, b):
+    """Satunnaisuudet"""
+    def arvo_kokonaisluku(self, a, b):
         return randint(a, b)
+
+    def arvo_joukosta(self, alkiot):
+        return choice(list(alkiot))
