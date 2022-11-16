@@ -6,6 +6,8 @@ class StubArpa1:
         return 1
 
     def arvo_joukosta(self, joukko):
+        if len(joukko) == 0:
+            return None
         lista = list(joukko)
         return lista[0]
 
@@ -14,6 +16,9 @@ class StubArpa2:
         return 2
 
     def arvo_joukosta(self, joukko):
+        print(joukko)
+        if len(joukko) == 0:
+            return None
         lista = list(joukko)
         return lista[1]
 
@@ -168,3 +173,71 @@ class TestTrie(unittest.TestCase):
         loydetty_sana = self.trie.hae(["yksi", "kaksi"])
 
         self.assertAlmostEqual(loydetty_sana, None)
+
+    # Hae sana joka alkaa isolla alkukirjaimella
+
+    def test_haku_iso_alkukirjain_tyhja_trie(self):
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, None)
+
+    def test_haku_iso_alkukirjain_yksi_pienlla_alkava_sana_juuressa(self):
+        self.trie.lisaa_sanalista(["sana"])
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "sana")
+
+    def test_haku_iso_alkukirjain_monta_pienella_alkavaa_sanaa_juuressa(self):
+        self.trie.lisaa_sanalista(["yksi"])
+        self.trie.lisaa_sanalista(["kaksi"])
+        self.trie.lisaa_sanalista(["kolme"])
+
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "yksi")
+
+    def test_haku_iso_alkukirjain_monta_pienella_alkavaa_sanaa_juuressa2(self):
+        self.trie2.lisaa_sanalista(["yksi"])
+        self.trie2.lisaa_sanalista(["kaksi"])
+        self.trie2.lisaa_sanalista(["kolme"])
+        sana = self.trie2.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "kaksi")
+
+    def test_haku_iso_alkukirjain_1_isolla_alkava_sana_juuressa(self):
+        self.trie.lisaa_sanalista(["Sana"])
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "Sana")
+
+    def test_haku_iso_alkukirjain_monta_isolla_alkavaa_sanaa_juuressa(self):
+        self.trie.lisaa_sanalista(["Yksi"])
+        self.trie.lisaa_sanalista(["Kaksi"])
+        self.trie.lisaa_sanalista(["Kolme"])
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "Yksi")
+
+    def test_haku_iso_alkukirjain_monta_isolla_alkavaa_sanaa_juuressa2(self):
+        self.trie2.lisaa_sanalista(["Yksi"])
+        self.trie2.lisaa_sanalista(["Kaksi"])
+        self.trie2.lisaa_sanalista(["Kolme"])
+        sana = self.trie2.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "Kaksi")
+
+    def test_haku_iso_alkukirjain_valitusta_seuraava_on_iso(self):
+        self.trie.lisaa_sanalista(["yksi"])
+        self.trie.lisaa_sanalista(["Kaksi"])
+        self.trie.lisaa_sanalista(["kolme"])
+        sana = self.trie.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "Kaksi")
+
+    def test_haku_iso_alkukirjain_valitusta_edellinen_on_iso(self):
+        self.trie2.lisaa_sanalista(["Yksi"])
+        self.trie2.lisaa_sanalista(["kaksi"])
+        self.trie2.lisaa_sanalista(["kolme"])
+        sana = self.trie2.hae_sana_juuresta_isolla_alkukirjaimella()
+
+        self.assertAlmostEqual(sana, "Yksi")
