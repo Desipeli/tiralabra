@@ -28,6 +28,7 @@ class TekstiKayttoliittyma:
         self._konsoli.kirjoita("2: lataa tiedosto")
         self._konsoli.kirjoita("3: muodosta lause")
         self._konsoli.kirjoita("4: muodosta tarina")
+        self._konsoli.kirjoita("t: trien koko")
         self._konsoli.kirjoita("q: lopeta")
         self._konsoli.kirjoita("h: päävalikon vaihtoehdot")
 
@@ -51,6 +52,10 @@ class TekstiKayttoliittyma:
                 self._tarinan_alku()
             elif syote == "h":
                 self._paavalikon_ohjeet()
+            elif syote == "t":
+                self._konsoli.kirjoita(
+                    self._ohjelma.hae_trien_koko()
+                )
             elif syote == "q":
                 break
         self._konsoli.kirjoita("suljetaan ohjelma")
