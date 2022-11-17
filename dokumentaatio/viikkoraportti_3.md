@@ -5,7 +5,7 @@ käytetty tuntimäärä n. 17
 ## Mitä olen tehnyt tällä viikolla?
 
 - Käyttöliittymän eriyttäminen ohjelmalogiikasta
-- Ohjelman tuottamaan tekstin hienosäätö
+- Ohjelman tuottaman tekstin hienosäätöä
 - Ohjelman tuottaman tekstin jäsennys
 - Bugien korjailua
 - Lisää testejä, erityisesti integraatiotestit Ohjelma-luokalle
