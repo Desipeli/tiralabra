@@ -25,4 +25,4 @@ Myös sanan valitsemista Triestä testataan erilaisten tilanteiden varalta, kute
 - Mitä jos yritetään hakea Trien syvyyttä syvemmältä
 - Toimiiko isolla kirjaimella alkavan sanan hakeminen oikein
 
-Koska sanan haku perustuu joissain tilanteissa satunnaisuuteen, on testejä varten luotu luokat `StubArpa1` ja `StubArpa`, jotka palauttavat aina tietyn arvon.
+Koska sanan haku perustuu joissain tilanteissa satunnaisuuteen, on testejä varten luotu luokat `StubArpa1` ja `StubArpa2`, jotka palauttavat aina tietyn arvon.
