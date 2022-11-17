@@ -21,3 +21,11 @@ Ohjelmassa on tällä hetkellä vain tekstikäyttöliittymä, joka toimii seuraa
   - q: Sulkee ohjelman
   - h: Tulostaa päävalikon vaihtoehdot
   
+## Testaus
+
+- Suorita komento `poetry run invoke testcov` hakemistossa `lausegeneraattori`
+- Testikattavuusraportti tallentuu kohteeseen `lausegeneraattori/htmlcov/index.py`
+
+## Lint
+
+- Suorita komento `poetry run invoke lint` hakemistossa `lausegeneraattori`
