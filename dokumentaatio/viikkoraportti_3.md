@@ -9,6 +9,7 @@ käytetty tuntimäärä n. 17
 - Ohjelman tuottaman tekstin jäsennys
 - Bugien korjailua
 - Lisää testejä, erityisesti integraatiotestit Ohjelma-luokalle
+- Trieen mahdollisuus hakea isolla kirjaimella alkavia sanoja. Testit.
 - Aloitin testausdokumentin kirjoittamisen
 - Aloitin käyttöohjeen kirjoittamisen
 
