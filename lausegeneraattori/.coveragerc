@@ -6,4 +6,5 @@ omit =
     src/konsoli.py,
     src/tiedostonlukija.py,
     src/tietorakenteet/tests/**,
-    src/index.py
+    src/index.py,
+    src/tekstikayttoliittyma.py
