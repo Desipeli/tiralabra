@@ -26,3 +26,11 @@ Myös sanan valitsemista Triestä testataan erilaisten tilanteiden varalta, kute
 - Toimiiko isolla kirjaimella alkavan sanan hakeminen oikein
 
 Koska sanan haku perustuu joissain tilanteissa satunnaisuuteen, on testejä varten luotu luokat `StubArpa1` ja `StubArpa2`, jotka palauttavat aina tietyn arvon.
+
+### Jasennin (jäsennin)
+
+Testataan, että Jasennin muodostaa tekstistä listoja ja listoista testejä oikein. Erityisesti on keskitytty välimerkkien(,.!?) testaamiseen, sillä ne käyttäytyvät hieman eri lailla kuin "normaalit" sanat.
+
+### Ohjelma
+
+Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, että esimerkiksi ohjelmalle syötetty merkkijono "tiedosto" tallentuu Trieen ja sen pohjalta voidaan muodostaa lauseita. Taas on pyritty huomioimaan erikoistapauksia, kuten tyhjän "tiedoston" tallentaminen, väärän muotoisen syötteen antaminen yms.
