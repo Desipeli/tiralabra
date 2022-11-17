@@ -126,8 +126,8 @@ class Ohjelma:
         if len(alku) == 0:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         lista_sanoja = self._jasennin.jasenna_listaksi(alku)
-        tekstin_pituus = len(lista_sanoja)
 
+        tekstin_pituus = len(lista_sanoja)
         while True:
             if tekstin_pituus >= pituus_rajoitus:
                 return self._muodosta_lause_loppuun(lista_sanoja)
