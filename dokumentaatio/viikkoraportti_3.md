@@ -26,6 +26,6 @@ Tällä hetkellä kaikki selvää
 
 ## Mitä teen seuraavaksi?
 
-- Aloitan kirjoittamaan toteutusraporttia
+- Aloitan toteutusraportin kirjoittamisen
 - Pyrin tekemään ohjelmalle graafisen käyttöliittymän, sillä nykyinen on aika kökkö. Tähän kuluu luultavasti suurin osa ajasta, sillä tkinter ei ole kovin tuttu
 - Jos aikaa jää niin hion ydintoiminnallisuutta. Esimerkiksi lainausmerkkien käsittely.
