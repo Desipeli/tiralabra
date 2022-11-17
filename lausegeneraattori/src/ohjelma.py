@@ -23,7 +23,10 @@ class Ohjelma:
         self._jasennin = jasennin
         self._arpa = arpa
 
-        self.aste = 2
+        self._aste = 2
+
+    def hae_aste(self):
+        return self._aste
 
     def vaihda_aste(self, uusi_aste):
         """ Uuden asteen valinta """
@@ -31,17 +34,17 @@ class Ohjelma:
         try:
             uusi_aste = int(uusi_aste)
         except ValueError:
-            return "Asteen oltava kokonaisluku >= 0"
+            return False
 
         if uusi_aste < 0:
-            return "Aste ei voi olla negatiivinen"
-        if uusi_aste == self.aste:
-            return "Astetta ei vaihdettu"
+            return False
+        if uusi_aste == self._aste:
+            return False
 
         self._trie = Trie(self._arpa)
-        self.aste = uusi_aste
+        self._aste = uusi_aste
 
-        return f"Uusi aste: {self.aste}, tiedostot ladattava uudestaan"
+        return True
 
     def lataa_tiedoston_sisalto(self, sisalto: str):
         """
@@ -55,25 +58,25 @@ class Ohjelma:
         """
         if sisalto:
             lista = self._jasennin.jasenna_listaksi(sisalto)
-            self._pilko_ja_laheta_trielle(lista)
-            return True
+            return self._pilko_ja_laheta_trielle(lista)
         return False
 
     def _pilko_ja_laheta_trielle(self, data: list):
         """
-        Valitaan listasta asteen pituiset sanajonot ja lähetetään ne
-        trielle.
+        Valitaan listasta kaikki peräkkäiset asteen pituiset
+        sanajonot ja lähetetään ne trielle.
 
         Parametrit:
             data: lista sanoja ja välimerkkejä
         """
-        aste = self.aste + 1
-        if aste > len(data):
-            return (False, "asteen oltava pienempi kuin syötteen pituus")
-        for i in range(len(data) - aste + 1):
+        aste = self._aste
+        if aste >= len(data):
+            return False
+
+        for i in range(len(data) - aste):
             sanalista = []
             dataosoitin = i
-            while dataosoitin < i + aste and dataosoitin < len(data):
+            while dataosoitin < i + aste + 1 and dataosoitin < len(data):
                 sanalista.append(data[dataosoitin])
                 dataosoitin += 1
             self._trie.lisaa_sanalista(sanalista)
@@ -90,6 +93,9 @@ class Ohjelma:
 
         Palauttaa valmiin lauseen merkkijonona
         """
+        if self.hae_trien_koko() == 0:
+            return False
+
         if len(alku) == 0:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         jasennetty = self._jasennin.jasenna_listaksi(alku)
@@ -112,28 +118,33 @@ class Ohjelma:
         try:
             pituus_rajoitus = int(pituus_rajoitus)
         except ValueError:
-            return (False, "Pituusrajoituksen oltava kokonaisluku")
+            return False
+
+        if self.hae_trien_koko() == 0:
+            return False
 
         if len(alku) == 0:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         lista_sanoja = self._jasennin.jasenna_listaksi(alku)
-        tekstin_pituus = len(alku)
+        tekstin_pituus = len(lista_sanoja)
 
         while True:
             if tekstin_pituus >= pituus_rajoitus:
                 return self._muodosta_lause_loppuun(lista_sanoja)
             sana = None
-            if self.aste == 0:
+            if self._aste == 0:
                 sana = self._trie.hae([])
             else:
-                sana = self._uusi_sana_edellisten_perusteella(lista_sanoja[-self.aste : ])
+                sana = self._uusi_sana_edellisten_perusteella(lista_sanoja[-self._aste : ])
             lista_sanoja.append(sana)
             tekstin_pituus += 1
 
     def _muodosta_lause_loppuun(self, teksti: list):
         """
         Haetaan tekstiin niin kauan uusia sanoja, kunnes
-        vastaan tulee jokin lopetusmerkki.
+        vastaan tulee jokin lopetusmerkki. Katkaisin määrittää
+        maksimi määrän sanoja, jonka jälkeen uusien sanojen lisääminen
+        viimeistään lopetetaan
 
         Parametrit:
             teksti: merkkijono
@@ -141,16 +152,18 @@ class Ohjelma:
         Palauttaa tekstin, joka päättyy lopetusmerkkiin.
         """
         lopetusmerkit = [".","!","?"]
+        katkaisin = 20
 
         while True:
             sana = None
-            if self.aste == 0:
+            if self._aste == 0 or katkaisin == 0:
                 sana = self._arpa.arvo_joukosta(lopetusmerkit)
             else:
-                sana = self._uusi_sana_edellisten_perusteella(teksti[-self.aste : ])
+                sana = self._uusi_sana_edellisten_perusteella(teksti[-self._aste : ])
             teksti.append(sana)
             if sana in lopetusmerkit:
                 break
+            katkaisin -= 1
 
         return self._jasennin.jasenna_tekstiksi(teksti)
 
@@ -169,3 +182,6 @@ class Ohjelma:
         if not sana:
             return self._uusi_sana_edellisten_perusteella(viimeiset_sanat[1:])
         return sana
+
+    def hae_trien_koko(self):
+        return len(self._trie.syvyyspuu())
