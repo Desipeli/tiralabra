@@ -17,7 +17,7 @@ TrieSolmu testaus tapahtuu Trien testauksen välityksellä.
 
 ### Trie
 
-Trieä testataan syöttämällä sille erilaisia 0-3 sanan listoja, joista se muodostaa solmuja. Testeillä varmistetaan, että Trie osaa luoda tarvittaessa uuden solmun, mutta että uutta solmua ei luoda jos sille ei ole tarvetta. Oikeellisuus varmistetaan tarkasetelemalla Trieä mm. syvyyshaulla.
+Trieä testataan syöttämällä sille erilaisia 0-3 sanan listoja, joista se muodostaa solmuja. Testeillä varmistetaan, että Trie osaa luoda tarvittaessa uuden solmun, ja että uutta solmua ei luoda jos sille ei ole tarvetta. Oikeellisuus varmistetaan tarkastelemalla Trieä mm. syvyyshaulla.
 
 Myös sanan valitsemista Triestä testataan erilaisten tilanteiden varalta, kuten:
 - Mitä saadaan jos haetaan sanaa tyhjästä Triestä
@@ -29,7 +29,7 @@ Koska sanan haku perustuu joissain tilanteissa satunnaisuuteen, on testejä vart
 
 ### Jasennin (jäsennin)
 
-Testataan, että Jasennin muodostaa tekstistä listoja ja listoista testejä oikein. Erityisesti on keskitytty välimerkkien(,.!?) testaamiseen, sillä ne käyttäytyvät hieman eri lailla kuin "normaalit" sanat.
+Testataan, että Jasennin muodostaa tekstistä listoja ja listoista tekstejä oikein. Erityisesti on keskitytty välimerkkien(,.!?) testaamiseen, sillä ne käyttäytyvät hieman eri lailla kuin "normaalit" sanat.
 
 ### Ohjelma
 
