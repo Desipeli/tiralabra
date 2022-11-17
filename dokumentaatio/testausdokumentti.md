@@ -7,4 +7,4 @@ Testattavia luokkia ovat Trie, TrieSolmu, Jasennin ja Ohjelma. Käyttöliittymä
 
 Linux-ympäristössä testit voidaan suorittaa asennuksen jälkeen komennolla `poetry run invoke testcov`, jonka jälkeen testikattavuusraportti tallentuu kohteeseen `lausegeneraattori/htmlcov/index.html`. 
 
-Viikon 3 testikattavuus: [](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/coverage_report_viikko_3.PNG)
+Viikon 3 testikattavuus: ![kuva](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/coverage_report_viikko_3.PNG)
