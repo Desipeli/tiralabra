@@ -7,4 +7,5 @@ omit =
     src/tiedostonlukija.py,
     src/tietorakenteet/tests/**,
     src/index.py,
-    src/tekstikayttoliittyma.py
+    src/tekstikayttoliittyma.py,
+    src/tietorakenteet/__init__.py
