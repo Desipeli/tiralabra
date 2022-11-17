@@ -57,11 +57,14 @@ class TekstiKayttoliittyma:
 
     def _valitse_aste(self):
         """ Uuden asteen valinta """
-        self._konsoli.kirjoita(f"nykyinen aste: {self._ohjelma.aste}")
+        self._konsoli.kirjoita(f"nykyinen aste: {self._ohjelma.hae_aste()}")
         syote = self._konsoli.lue("syötä uusi aste (pos. kokonaisluku): ")
 
         tulos = self._ohjelma.vaihda_aste(syote)
-        self._konsoli.kirjoita(tulos)
+        if tulos:
+            self._konsoli.kirjoita("aste vaihdttu, tiedostot ladattava uudestaan")
+        else:
+            self._konsoli.kirjoita("astetta ei vaihdettu")
 
     def _valitse_tiedosto(self):
         """
@@ -88,7 +91,10 @@ class TekstiKayttoliittyma:
         """
         alku = self._konsoli.lue("Alkusanat: ")
         lause = self._ohjelma.lauseen_muodostuksen_aloitus(alku)
-        self._konsoli.kirjoita(lause)
+        if lause:
+            self._konsoli.kirjoita(lause)
+        else:
+            self._konsoli.kirjoita("Virhe. Muista ladata tiedosto(ja)")
 
     def _tarinan_alku(self):
         """
@@ -105,4 +111,7 @@ class TekstiKayttoliittyma:
 
         alku = self._konsoli.lue("Alkusanat: ")
         tarina = self._ohjelma.tarinan_muodostuksen_aloitus(alku, pituus)
-        self._konsoli.kirjoita(tarina)
+        if tarina:
+            self._konsoli.kirjoita(tarina)
+        else:
+            self._konsoli.kirjoita("Virhe. Muista ladata tiedosto(ja)")
