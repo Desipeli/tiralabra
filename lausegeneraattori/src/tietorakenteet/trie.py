@@ -1,11 +1,11 @@
-from string import punctuation
+from arpa import Arpa
 from .trie_solmu import TrieSolmu
 
 
 class Trie:
     """ Trie-tietorakenne"""
 
-    def __init__(self, arpa) -> None:
+    def __init__(self, arpa: "Arpa") -> None:
         """
         Konstruktori, luodaan juurisolmu.
 
@@ -61,7 +61,7 @@ class Trie:
         else:
             return
 
-    def hae(self, sanalista):
+    def hae(self, sanalista: list):
         """
         Haetaan triestä sana
 
@@ -102,7 +102,7 @@ class Trie:
         return self._etsi_seuraava_sana(sanalista, uusi_solmu, uusi_syvyys)
 
 
-    def _arvo_solmu(self, solmu):
+    def _arvo_solmu(self, solmu: "TrieSolmu"):
         """
         Arvotaan uusi sana esiintymistiheyden perusteella
 
@@ -171,7 +171,7 @@ class Trie:
         self._syvyys_solmu(solmu, lista)
         return lista
 
-    def _syvyys_solmu(self, solmu, lista):
+    def _syvyys_solmu(self, solmu: "TrieSolmu", lista: list):
 
         for lapsisolmu in solmu.lapset.values():
             lista.append(lapsisolmu)
