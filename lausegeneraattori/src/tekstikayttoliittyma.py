@@ -82,12 +82,13 @@ class TekstiKayttoliittyma:
             tiedosto_lista = self._tiedostonlukija.kaikkien_tiedostojen_nimet()
             for tiedoston_nimi in tiedosto_lista:
                 sisalto = self._tiedostonlukija.lue(tiedoston_nimi)
-
+                if len(sisalto) > 0:
+                    self._ohjelma.lataa_tiedoston_sisalto(sisalto)
+                    self._konsoli.kirjoita(tiedoston_nimi)
         else:
             sisalto = self._tiedostonlukija.lue(syote)
-
-        if len(sisalto) > 0:
-            self._ohjelma.lataa_tiedoston_sisalto(sisalto)
+            if len(sisalto) > 0:
+                self._ohjelma.lataa_tiedoston_sisalto(sisalto)
 
     def _lauseen_alku(self):
         """
