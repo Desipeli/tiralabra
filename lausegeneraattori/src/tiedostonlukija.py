@@ -29,6 +29,7 @@ class TiedostonLukija:
 
         return sisalto
 
-    def kaikkien_tiedostojen_nimet(self):
-        """Palautetaan kaikkien tiedostojen nimet"""
-        return listdir(os.path.dirname(__file__)+"/data/")
+    def kaikkien_tiedostojen_nimet(self, dir):
+        """Palautetaan kaikkien .txt-päätteisten tiedostojen nimet"""
+        tiedostolista = listdir(dir)
+        return [nimi for nimi in tiedostolista if len(nimi) >= 4 and nimi[-4:] == ".txt"]

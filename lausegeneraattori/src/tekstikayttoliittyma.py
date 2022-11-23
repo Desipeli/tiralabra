@@ -1,3 +1,4 @@
+import os
 from konsoli import Konsoli
 from tiedostonlukija import TiedostonLukija
 from ohjelma import Ohjelma
@@ -79,16 +80,19 @@ class TekstiKayttoliittyma:
         sisalto = ""
         syote = self._konsoli.lue("tiedoston nimi: ")
         if syote == "KAIKKI":
-            tiedosto_lista = self._tiedostonlukija.kaikkien_tiedostojen_nimet()
+            polku = os.path.join(os.path.dirname(__file__), "data")
+            tiedosto_lista = self._tiedostonlukija.kaikkien_tiedostojen_nimet(polku)
             for tiedoston_nimi in tiedosto_lista:
-                sisalto = self._tiedostonlukija.lue(tiedoston_nimi)
+                sisalto = self._tiedostonlukija.lue(os.path.join(polku, tiedoston_nimi))
                 if len(sisalto) > 0:
                     self._ohjelma.lataa_tiedoston_sisalto(sisalto)
-                    self._konsoli.kirjoita(tiedoston_nimi)
+                    self._konsoli.kirjoita(os.path.join(polku, tiedoston_nimi))
         else:
-            sisalto = self._tiedostonlukija.lue(syote)
+            polku = os.path.join(os.path.dirname(__file__), "data", syote)
+            sisalto = self._tiedostonlukija.lue(polku)
             if len(sisalto) > 0:
                 self._ohjelma.lataa_tiedoston_sisalto(sisalto)
+                self._konsoli.kirjoita(os.path.join(polku))
 
     def _lauseen_alku(self):
         """
