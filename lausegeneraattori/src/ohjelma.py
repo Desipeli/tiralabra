@@ -14,8 +14,6 @@ class Ohjelma:
         Konstruktori
 
         Parametrit:
-            konsoli: tulostukseen ja syötteiden lukuun
-            tiedostonlukija: Palauttaa tiedoston sisällön merkkijonona
             jasennin: datan muuttaminen sopivaan muotoon
             arpa: satunnaislukugeneraattori
         """

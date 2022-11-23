@@ -17,7 +17,7 @@ class TiedostonLukija:
         sisalto = ""
         try:
             with open(
-                os.path.dirname(__file__)+"/data/"+tiedoston_nimi,
+                tiedoston_nimi,
                 "r",
                 encoding="UTF-8") as tiedosto:
 

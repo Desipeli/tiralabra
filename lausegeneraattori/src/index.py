@@ -5,6 +5,7 @@ from jasennin import Jasennin
 from arpa import Arpa
 from ohjelma import Ohjelma
 from tekstikayttoliittyma import TekstiKayttoliittyma
+from gui import GUI
 
 
 if __name__ == "__main__":
@@ -18,8 +19,9 @@ if __name__ == "__main__":
         arpa
     )
 
-    kayttoliittyma = TekstiKayttoliittyma(
-        konsoli,
-        tiedostonlukija,
-        ohjelma
-    ).kaynnista()
+    # kayttoliittyma = TekstiKayttoliittyma(
+    #     konsoli,
+    #     tiedostonlukija,
+    #     ohjelma
+    # ).kaynnista()
+    kayttoliittyma = GUI(ohjelma, tiedostonlukija) 
