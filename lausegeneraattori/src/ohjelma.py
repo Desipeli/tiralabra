@@ -99,7 +99,7 @@ class Ohjelma:
         jasennetty = self._jasennin.jasenna_listaksi(alku)
         return self._muodosta_lause_loppuun(jasennetty)
 
-    def tarinan_muodostuksen_aloitus(self, alku: str, pituus_rajoitus: int):
+    def tarinan_muodostuksen_aloitus(self, alku: str, pituus_rajoitus: int, katkaisin: int = 0):
         """
         Muodostetaan tarina alkusanojen perusteella. Jos funktiota
         kutsutaan tyhjällä merkkijonolla, arvotaan ensimmäiseksi sanaksi
@@ -109,6 +109,8 @@ class Ohjelma:
             alku: Tyhjä, tai sanoista koostuva merkkijono
             pituus_rajoitus: Kun sanojen määrä on saavuttanut tämän arvon,
                 lopetetaan tekstin muodostus seuraavaan lopetusmerkkiin.
+            katkaisin: Rajoitin, jotta lauseen muodostus päättyy
+                varmasti joskus
 
         Palauttaa vähintään pituus_rajoitus:n mittaisen tekstin
 
@@ -128,7 +130,7 @@ class Ohjelma:
         tekstin_pituus = len(lista_sanoja)
         while True:
             if tekstin_pituus >= pituus_rajoitus:
-                return self._muodosta_lause_loppuun(lista_sanoja)
+                return self._muodosta_lause_loppuun(lista_sanoja, katkaisin)
             sana = None
             if self._aste == 0:
                 sana = self._trie.hae([])
@@ -137,7 +139,7 @@ class Ohjelma:
             lista_sanoja.append(sana)
             tekstin_pituus += 1
 
-    def _muodosta_lause_loppuun(self, teksti: list):
+    def _muodosta_lause_loppuun(self, teksti: list, katkaisin: int = 100):
         """
         Haetaan tekstiin niin kauan uusia sanoja, kunnes
         vastaan tulee jokin lopetusmerkki. Katkaisin määrittää
@@ -145,23 +147,25 @@ class Ohjelma:
         viimeistään lopetetaan
 
         Parametrit:
-            teksti: merkkijono
+            teksti: lista sanoja, joiden perusteella lause muodostetaan
+            katkaisin: Rajoitin, jotta lauseen muodostus varmasti päättyy
 
         Palauttaa tekstin, joka päättyy lopetusmerkkiin.
         """
         lopetusmerkit = [".","!","?"]
-        katkaisin = 20
+
+        katki = katkaisin
 
         while True:
             sana = None
-            if self._aste == 0 or katkaisin == 0:
+            if self._aste == 0 or katki == 0:
                 sana = self._arpa.arvo_joukosta(lopetusmerkit)
             else:
                 sana = self._uusi_sana_edellisten_perusteella(teksti[-self._aste : ])
             teksti.append(sana)
             if sana in lopetusmerkit:
                 break
-            katkaisin -= 1
+            katki -= 1
 
         return self._jasennin.jasenna_tekstiksi(teksti)
 
