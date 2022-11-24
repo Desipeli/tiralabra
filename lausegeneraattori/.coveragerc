@@ -9,3 +9,4 @@ omit =
     src/index.py,
     src/tekstikayttoliittyma.py,
     src/tietorakenteet/__init__.py
+    src/gui.py
