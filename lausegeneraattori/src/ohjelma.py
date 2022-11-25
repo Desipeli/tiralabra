@@ -1,3 +1,4 @@
+import time
 from tietorakenteet.trie import Trie
 from jasennin import Jasennin
 from arpa import Arpa
@@ -70,14 +71,21 @@ class Ohjelma:
         aste = self._aste
         if aste >= len(data):
             return False
-
+        aika_sanalista = 0
+        aika_trie = 0
         for i in range(len(data) - aste):
+            alku_sanalista = time.time()
             sanalista = []
             dataosoitin = i
             while dataosoitin < i + aste + 1 and dataosoitin < len(data):
                 sanalista.append(data[dataosoitin])
                 dataosoitin += 1
+            aika_sanalista += time.time() - alku_sanalista
+            alku_trie = time.time()
             self._trie.lisaa_sanalista(sanalista)
+            aika_trie += time.time() - alku_trie
+        print("sanlistojen muodostukseen kulunut aika", aika_trie)
+        print("Trieen talletusten aika", aika_sanalista)
         return True
 
     def lauseen_muodostuksen_aloitus(self, alku: str):
@@ -99,7 +107,7 @@ class Ohjelma:
         jasennetty = self._jasennin.jasenna_listaksi(alku)
         return self._muodosta_lause_loppuun(jasennetty)
 
-    def tarinan_muodostuksen_aloitus(self, alku: str, pituus_rajoitus: int, katkaisin: int = 0):
+    def tarinan_muodostuksen_aloitus(self, alku: str, pituus_rajoitus: int, katkaisin: int = 20):
         """
         Muodostetaan tarina alkusanojen perusteella. Jos funktiota
         kutsutaan tyhjällä merkkijonolla, arvotaan ensimmäiseksi sanaksi
@@ -107,7 +115,7 @@ class Ohjelma:
 
         Parametrit:
             alku: Tyhjä, tai sanoista koostuva merkkijono
-            pituus_rajoitus: Kun sanojen määrä on saavuttanut tämän arvon,
+            pituus_rajoitus: Kun lisättävien sanojen määrä on saavuttanut tämän arvon,
                 lopetetaan tekstin muodostus seuraavaan lopetusmerkkiin.
             katkaisin: Rajoitin, jotta lauseen muodostus päättyy
                 varmasti joskus
@@ -127,9 +135,9 @@ class Ohjelma:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         lista_sanoja = self._jasennin.jasenna_listaksi(alku)
 
-        tekstin_pituus = len(lista_sanoja)
+        tekstin_pituus = max(0, pituus_rajoitus - 1)
         while True:
-            if tekstin_pituus >= pituus_rajoitus:
+            if tekstin_pituus == 0:
                 return self._muodosta_lause_loppuun(lista_sanoja, katkaisin)
             sana = None
             if self._aste == 0:
@@ -137,9 +145,9 @@ class Ohjelma:
             else:
                 sana = self._uusi_sana_edellisten_perusteella(lista_sanoja[-self._aste : ])
             lista_sanoja.append(sana)
-            tekstin_pituus += 1
+            tekstin_pituus -= 1
 
-    def _muodosta_lause_loppuun(self, teksti: list, katkaisin: int = 100):
+    def _muodosta_lause_loppuun(self, teksti: list, katkaisin: int = 20):
         """
         Haetaan tekstiin niin kauan uusia sanoja, kunnes
         vastaan tulee jokin lopetusmerkki. Katkaisin määrittää
@@ -186,4 +194,9 @@ class Ohjelma:
         return sana
 
     def hae_trien_koko(self):
+        """ palautetaan solmujen lkm """
         return len(self._trie.syvyyspuu())
+
+    def tyhjenna_trie(self):
+        """ Luodaan uusi trie vanhan tilalle """
+        self._trie = Trie(self._arpa)
