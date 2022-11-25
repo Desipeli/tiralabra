@@ -84,11 +84,10 @@ class Ohjelma:
             alku_trie = time.time()
             self._trie.lisaa_sanalista(sanalista)
             aika_trie += time.time() - alku_trie
-        print("sanlistojen muodostukseen kulunut aika", aika_trie)
-        print("Trieen talletusten aika", aika_sanalista)
+        print(f"aste: {aste} listat: {aika_sanalista} trie: {aika_trie}")
         return True
 
-    def lauseen_muodostuksen_aloitus(self, alku: str):
+    def lauseen_muodostuksen_aloitus(self, alku: str, katkaisin: int = 20):
         """
         Muodostetaan lause alkusanojen perusteella. Jos funktiota
         kutsutaan tyhjällä merkkijonolla, arvotaan ensimmäiseksi sanaksi
@@ -105,7 +104,7 @@ class Ohjelma:
         if len(alku) == 0:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         jasennetty = self._jasennin.jasenna_listaksi(alku)
-        return self._muodosta_lause_loppuun(jasennetty)
+        return self._muodosta_lause_loppuun(jasennetty, katkaisin)
 
     def tarinan_muodostuksen_aloitus(self, alku: str, pituus_rajoitus: int, katkaisin: int = 20):
         """
