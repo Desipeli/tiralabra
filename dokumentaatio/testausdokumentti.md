@@ -41,3 +41,8 @@ Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, et
 
 - Tiedostosta luetun tekstin muuttaminen listaksi, sekä merkkien ``,.!?"'--»`` erottelu tai hylkääminen: Seuraavassa kuvaajasta nähdään, että jäsennykseen kuluva aika riippuu sanojen määrän lisäksi tiedoston sisällöstä. Aikaa tähän operaatioon kuluu ohjelman toiminnan kannalta kuitenkin mitättömän vähän, alle 0.05 s.
 ![Jäsennys listaksi](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/jasennys_listaksi.png)
+
+
+### Trie
+- Kun tekstitiedoston sisältö on muutettu listaksi sanoja ja merkkejä, pilkotaan saatu lista asteen pituisiin listoihin jotka tallennetaan trieen. Seuraavassa kaaviossa näkyy sekä pilkkomiseen että varsinaiseen tallentamiseen kuluva aika. Listan pilkkomisen vaikutus koko operaatioon on vähäinen, alle 0.1 sekuntia. Kaaviosta nähdään myös, että asteen kasvaessa tallentamiseen kuluva aika kasvaa lineaarisesti.
+![Tallennus Trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/pilkkominen_trieen.png)
