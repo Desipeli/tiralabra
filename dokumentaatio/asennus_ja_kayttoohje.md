@@ -16,7 +16,7 @@ Suorita komento `poetry run invoke start` hakemistossa `lausegeneraattori`
 Käyttöliittymä koostuu vasemmalla olevasta toimintopalkista, sekä suurimman osan ikkunaa kattavasta tekstilaatikosta.
 - Toiminnot:
   - Lataa tiedostoja: Voit valita kerralla useita .txt päätteisiä tiedostoja, joiden sisältö tallennetaan trieen.
-  - Vaihda aste: Aste voi olla mikä tahansa positiivinen kokonaisluku tai nolla (ei tuota mitään järkevää). Mitä suurempi aste sitä pidemmät latausajat. En suosittele yli 4
+  - Vaihda aste: Aste voi olla mikä tahansa positiivinen kokonaisluku tai nolla (ei tuota mitään järkevää). Mitä suurempi aste sitä pidemmät latausajat. En suosittele yli 4. ``Asteen vaihtaminen tyhentää muistin``
   - Muodosta lause: Muodostaa lauseen jos ohjelmaan on ladattu dataa. Tekstilaatikkoon voi kirjoittaa valmiiksi sanoja, jolloin ohjelma pyrkii jatkamaan lausetta niiden perusteella. Jos tekstilaatikko on tyhjä, arpoo ohjelma jonkin isolla kirjaimella alkavan sanan.
   - Muodosta tarina: voidaan muodostaa tekstiä, jonka minimipituus (välimerkit lasketaan tässä sanoiksi) on alapuolella olevan kentän arvo.
   - Kopioi: Kopioi tekstin leikepöydälle
