@@ -34,3 +34,10 @@ Testataan, että Jasennin muodostaa tekstistä listoja ja listoista tekstejä oi
 ### Ohjelma
 
 Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, että esimerkiksi ohjelmalle syötetty merkkijono "tiedosto" tallentuu Trieen ja sen pohjalta voidaan muodostaa lauseita. Taas on pyritty huomioimaan erikoistapauksia, kuten tyhjän "tiedoston" tallentaminen, väärän muotoisen syötteen antaminen yms.
+
+## Suorituskyky
+
+### Jäsennin
+
+- Tiedostosta luetun tekstin muuttaminen listaksi, sekä merkkien ``,.!?"'--»`` erottelu tai hylkääminen: Seuraavassa kuvaajasta nähdään, että jäennykeen kuluva aika riippuu sanojen määrän lisäksi tiedoston sisällöstä. Aikaa tähän operaatioon ohjelman toiminnan kannalta kuitenkin mitättömän vähän aikaa, alle 0.05 s.
+![Jäsennys listaksi](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/jasennys_listaksi.png)
