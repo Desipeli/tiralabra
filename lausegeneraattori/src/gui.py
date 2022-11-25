@@ -42,7 +42,7 @@ class GUI:
         teksti_triessa_solmuja = tk.Label(toimintokehys, text="Triessä solmuja:")
         self.teksti_solmut = tk.Label(toimintokehys, text="0")
         nappi_lause = tk.Button(toimintokehys,
-            text="Muodosta Lause",
+            text="Muodosta lause",
             command=self.muodosta_lause)
         tarinan_pituus = tk.Label(toimintokehys, text="tarinan pituus min")
         self.input_tarinan_pituus = tk.Entry(toimintokehys, text="20")
@@ -51,6 +51,8 @@ class GUI:
             command=self.muodosta_tarina)
         nappi_kopioi = tk.Button(toimintokehys, text="Kopioi", command=self.kopioi_teksti)
         nappi_tyhjenna = tk.Button(toimintokehys, text="Tyhennä", command=self.tyhjenna)
+        nappi_tyhjenna_trie = tk.Button(toimintokehys,
+            text="Tyhjennä muisti", command=self.tyhjenna_trie)
 
         nappi_lataa.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
         self.teksti_aste.grid(row=1, column=0, sticky="ew", padx=5)
@@ -63,6 +65,7 @@ class GUI:
         nappi_tarina.grid(row=8, column=0, sticky="ew", padx=5)
         nappi_kopioi.grid(row=9, column=0, sticky="ew", padx=5)
         nappi_tyhjenna.grid(row=10, column=0, sticky="ew", padx=5)
+        nappi_tyhjenna_trie.grid(row=11, column=0, sticky="ew", padx=5)
 
     def lataa_tiedostoja(self):
         """ Voidaan ladata monta tiedostoa kerralla """
@@ -155,3 +158,8 @@ class GUI:
     def tyhjenna(self):
         """ Tyhjentää tekstilaatikon sisällön """
         self.tekstilaatikko.delete("1.0", tk.END)
+    
+    def tyhjenna_trie(self):
+        """ Tyhentää trien """
+        self.ohjelma.tyhjenna_trie()
+        self.paivita_solmut()
