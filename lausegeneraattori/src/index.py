@@ -7,6 +7,7 @@ from arpa import Arpa
 from ohjelma import Ohjelma
 from tekstikayttoliittyma import TekstiKayttoliittyma
 from gui import GUI
+from tests.suorituskykytestaus import SuoritusTestaus
 
 
 
@@ -17,14 +18,14 @@ if __name__ == "__main__":
     jasennin = Jasennin()
     ohjelma = Ohjelma(jasennin, arpa)
 
-    print(len(sys.argv))
-
     if len(sys.argv) == 2:
-        if sys.argv[1] == "text":
+        if sys.argv[1] == "teksti":
             TekstiKayttoliittyma(
                 konsoli,
                 tiedostonlukija,
                 ohjelma
             ).kaynnista()
-            sys.exit(0)
-    GUI(ohjelma, tiedostonlukija)
+        elif sys.argv[1] == "test":
+            SuoritusTestaus()
+        sys.exit(0)
+    GUI(ohjelma, tiedostonlukija, konsoli)
