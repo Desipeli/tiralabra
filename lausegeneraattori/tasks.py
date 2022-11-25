@@ -9,5 +9,9 @@ def testcov(ctx):
     ctx.run("coverage run --branch -m pytest; coverage html", pty=True)
 
 @task
+def testperf(ctx):
+    ctx.run("python3 src/index.py test", pty=True)
+
+@task
 def lint(ctx):
     ctx.run("pylint src", pty=True)
