@@ -17,7 +17,9 @@ class Jasennin:
                         "!", " ! ").replace(
                             "'", "").replace(
                                 '"', "").replace(
-                                    "?", " ? ").split()
+                                    "»", "").replace(
+                                        "--", "").replace(
+                                            "?", " ? ").split()
 
         return jasennetty
 
