@@ -1,17 +1,20 @@
 import os
+from time import time
 import tkinter as tk
 from tkinter import filedialog, simpledialog, messagebox
 from ohjelma import Ohjelma
 from tiedostonlukija import TiedostonLukija
+from konsoli import Konsoli
 
 class GUI:
     """ Graafinen käyttöliittymä """
-    def __init__(self, ohjelma: "Ohjelma", tiedostonlukija: "TiedostonLukija") -> None:
+    def __init__(self, ohjelma: "Ohjelma", tiedostonlukija: "TiedostonLukija", konsoli: "Konsoli"):
         """ Konstruktori
 
         """
         self.ohjelma = ohjelma
         self.tiedostonlukija = tiedostonlukija
+        self.konsoli = konsoli
 
         self.ikkuna = tk.Tk()
         self.ikkuna.rowconfigure(0, minsize=400, weight=1)
@@ -30,12 +33,14 @@ class GUI:
         self.ikkuna.mainloop()
 
     def luo_toimintokehyksen_osat(self, toimintokehys):
+        """ Luodaan ja piirretään GUI:n vasen palkki """
         nappi_lataa = tk.Button(toimintokehys,
         text="Lataa tiedostoja",
         command=self.lataa_tiedostoja)
         nappi_aste = tk.Button(toimintokehys, text="Vaihda aste", command=self.vaihda_aste)
         self.teksti_aste = tk.Label(toimintokehys, text="aste: ")
-        self.teksti_solmut = tk.Label(toimintokehys, text="Triessä solmuja: 0")
+        teksti_triessa_solmuja = tk.Label(toimintokehys, text="Triessä solmuja:")
+        self.teksti_solmut = tk.Label(toimintokehys, text="0")
         nappi_lause = tk.Button(toimintokehys,
             text="Muodosta Lause",
             command=self.muodosta_lause)
@@ -49,14 +54,15 @@ class GUI:
 
         nappi_lataa.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
         self.teksti_aste.grid(row=1, column=0, sticky="ew", padx=5)
-        self.teksti_solmut.grid(row=2, column=0, sticky="ew", padx=5)
-        nappi_aste.grid(row=3, column=0, sticky="ew", padx=5)
-        nappi_lause.grid(row=4, column=0, sticky="ew", padx=5)
-        tarinan_pituus.grid(row=5, column=0, sticky="ew", padx=5)
-        self.input_tarinan_pituus.grid(row=6, column=0, sticky="ew", padx=5)
-        nappi_tarina.grid(row=7, column=0, sticky="ew", padx=5)
-        nappi_kopioi.grid(row=8, column=0, sticky="ew", padx=5)
-        nappi_tyhjenna.grid(row=9, column=0, sticky="ew", padx=5)
+        nappi_aste.grid(row=2, column=0, sticky="ew", padx=5)
+        teksti_triessa_solmuja.grid(row=3, column=0, sticky="ew", padx=5)
+        self.teksti_solmut.grid(row=4, column=0, sticky="ew", padx=5)
+        nappi_lause.grid(row=5, column=0, sticky="ew", padx=5)
+        tarinan_pituus.grid(row=6, column=0, sticky="ew", padx=5)
+        self.input_tarinan_pituus.grid(row=7, column=0, sticky="ew", padx=5)
+        nappi_tarina.grid(row=8, column=0, sticky="ew", padx=5)
+        nappi_kopioi.grid(row=9, column=0, sticky="ew", padx=5)
+        nappi_tyhjenna.grid(row=10, column=0, sticky="ew", padx=5)
 
     def lataa_tiedostoja(self):
         """ Voidaan ladata monta tiedostoa kerralla """
@@ -67,13 +73,18 @@ class GUI:
                         "*.txt*"),
                         ("all files",
                         "*.*")))
+        self.konsoli.kirjoita("Aloitetaan tiedostojen lataaminen")
         for nimi in tiedostojen_nimet:
+            self.konsoli.kirjoita(f"Luetaan tiedosoton {nimi} sisältö")
+            luku_alkaa = time()
             sisalto = self.tiedostonlukija.lue(nimi)
+            self.konsoli.kirjoita(f"{time() - luku_alkaa} s")
+            self.konsoli.kirjoita("Ladataan sisältö ohjelmaan")
+            lataus_alkaa = time()
             onnistui = self.ohjelma.lataa_tiedoston_sisalto(sisalto)
-            if onnistui:
-                print(nimi)
-            else:
-                print("Virhe: ", nimi)
+            self.konsoli.kirjoita(f"{time() - lataus_alkaa} s")
+            if not onnistui:
+                messagebox.showerror(message=f"Tiedostoa {nimi} ei voitu ladata")
         self.paivita_solmut()
 
     def vaihda_aste(self):
@@ -90,11 +101,16 @@ class GUI:
     def paivita_aste(self, aste):
         """ Päivitetään GUI:n näyttämä aste """
         self.teksti_aste.config(text=f"aste: {aste}")
+        self.paivita_solmut()
 
     def muodosta_lause(self):
+        """
+        Lähetetään ohjelmalle tekstilaatikon sisältö ja tulostetaan
+        samaan laatikkoon saatu lause. Aikaisempi teksti säilyy.
+        
+        """
         alku = self.tekstilaatikko.get("1.0", tk.END).rstrip()
         lause = self.ohjelma.lauseen_muodostuksen_aloitus(alku)
-        print(lause)
         if lause:
             self.tekstilaatikko.delete("1.0", tk.END)
             self.tekstilaatikko.insert("1.0", lause)
@@ -103,19 +119,20 @@ class GUI:
                 message="Teksitn muodostus ei onnistu. Oletko varmasti ladannut tiedostoja?")
 
     def muodosta_tarina(self):
+        """
+        Lähetetään ohjelmalle tekstilaatikon sisältö ja pituusrajoitus.
+        Tulostetaan samaan laatikkoon saatu tarina. Aikaisempi teksti säilyy.
+        
+        """
         alku = self.tekstilaatikko.get("1.0", tk.END).rstrip()
         pituus = self.input_tarinan_pituus.get()
-        print("pituus:", pituus)
         try:
             pituus = int(pituus)
         except ValueError:
             pituus = 0
         pituus = min(pituus, 1000)
         self.paivita_pituus(pituus)
-        print("päivbitetty:", pituus)
-        print("Alku ", alku)
         tarina = self.ohjelma.tarinan_muodostuksen_aloitus(alku, pituus)
-        print(tarina)
         if tarina:
             self.tekstilaatikko.delete("1.0", tk.END)
             self.tekstilaatikko.insert("1.0", tarina)
@@ -130,11 +147,13 @@ class GUI:
     def paivita_solmut(self):
         """ Haetaan ohjelmasta trien solmujen lkm ja näytetään se """
         solmuja = self.ohjelma.hae_trien_koko()
-        self.teksti_solmut.config(text=f"triessä solmuja: {solmuja}")
+        self.teksti_solmut.config(text=f"{solmuja}")
 
     def kopioi_teksti(self):
+        """ Kopioi tekstilaatikon sisällön leikepöydälle """
         self.ikkuna.clipboard_clear()
         self.ikkuna.clipboard_append(self.tekstilaatikko.get("1.0", tk.END))
 
     def tyhjenna(self):
+        """ Tyhjentää tekstilaatikon sisällön """
         self.tekstilaatikko.delete("1.0", tk.END)
