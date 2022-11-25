@@ -11,7 +11,22 @@ Kloonaa repositorio omalle koneelle, ja suorita komento `poetry install` hakemis
 
 Suorita komento `poetry run invoke start` hakemistossa `lausegeneraattori`
 
-Ohjelmassa on tällä hetkellä vain tekstikäyttöliittymä, joka toimii seuraavanlaisesti:
+## GUI
+
+Käyttöliittymä koostuu vasemmalla olevasta toimintopalkista, sekä suurimman osan ikkunaa kattavasta tekstikentästä.
+- Toiminnot:
+  - Lataa tiedostoja: Voit valita kerralla useita .txt päätteisiä tiedostoja, joiden sisältö tallennetaan trieen.
+  - Vaihda aste: Aste voi olla mikä tahansa positiivinen kokonaisluku tai nolla (ei tuota mitään järkevää). Mitä suurempi aste sitä pidemmät latausajat. En suosittele yli 4
+  - Muodosta lause: Muodostaa lauseen jos ohjelmaan on ladattu dataa. Tekstikenttään voi kirjoittaa valmiiksi sanoja, jolloin ohjelma pyrkii jatkamaan lausetta niiden perusteella. Jos tekstikenttä on tyhjä, arpoo ohjelma jonkin isolla kirjaimella alkavan sanan.
+  - Muodosta tarina: voidaan muodostaa tekstiä, jonka minimipituus (välimerkit lasketaan tässä sanoiksi) on alapuolella olevan kentän arvo.
+  - Kopioi: Kopioi tekstin leikepöydälle
+  - Tyhjennä: Tyhjentää tekstikentän
+  
+
+## Tekstikäyttöliittymä
+
+En suosittele, graafinen on helpompi käyttää.
+
 - Päävalikossa syötetään komentoa vastaava numero/kirjain ja painetaan `enter`
   - 1: Voidaan vaihtaa Markovin ketjun astetta. Jos ohjelmaan on jo ladattu tiedostoja, niiden tiedot katoavat tämän komennon jälkeen. Asteen on oltava 0 tai suurempi kokonaisluku
   - 2: Ohjelma pyytää tiedoston nimeä. Syötä `lausegeneraattori/data` hakemistossa olevan tekstitiedoston nimi. Muista tiedostopääte! Esimerkiksi `tiedosto.txt`. Vaihtoehtoisesti voit kirjoittaa isolla `KAIKKI`, jolloin ohjelmaan ladataan kaikki data-kansiossa olevat tiedostot
