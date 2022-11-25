@@ -39,5 +39,5 @@ Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, et
 
 ### Jäsennin
 
-- Tiedostosta luetun tekstin muuttaminen listaksi, sekä merkkien ``,.!?"'--»`` erottelu tai hylkääminen: Seuraavassa kuvaajasta nähdään, että jäennykeen kuluva aika riippuu sanojen määrän lisäksi tiedoston sisällöstä. Aikaa tähän operaatioon ohjelman toiminnan kannalta kuitenkin mitättömän vähän aikaa, alle 0.05 s.
+- Tiedostosta luetun tekstin muuttaminen listaksi, sekä merkkien ``,.!?"'--»`` erottelu tai hylkääminen: Seuraavassa kuvaajasta nähdään, että jäsennykseen kuluva aika riippuu sanojen määrän lisäksi tiedoston sisällöstä. Aikaa tähän operaatioon kuluu ohjelman toiminnan kannalta kuitenkin mitättömän vähän, alle 0.05 s.
 ![Jäsennys listaksi](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/jasennys_listaksi.png)
