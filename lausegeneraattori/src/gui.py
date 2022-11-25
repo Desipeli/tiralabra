@@ -76,9 +76,7 @@ class GUI:
         self.konsoli.kirjoita("Aloitetaan tiedostojen lataaminen")
         for nimi in tiedostojen_nimet:
             self.konsoli.kirjoita(f"Luetaan tiedosoton {nimi} sisältö")
-            luku_alkaa = time()
             sisalto = self.tiedostonlukija.lue(nimi)
-            self.konsoli.kirjoita(f"{time() - luku_alkaa} s")
             self.konsoli.kirjoita("Ladataan sisältö ohjelmaan")
             lataus_alkaa = time()
             onnistui = self.ohjelma.lataa_tiedoston_sisalto(sisalto)
@@ -110,7 +108,7 @@ class GUI:
         
         """
         alku = self.tekstilaatikko.get("1.0", tk.END).rstrip()
-        lause = self.ohjelma.lauseen_muodostuksen_aloitus(alku)
+        lause = self.ohjelma.lauseen_muodostuksen_aloitus(alku, 100)
         if lause:
             self.tekstilaatikko.delete("1.0", tk.END)
             self.tekstilaatikko.insert("1.0", lause)
@@ -132,7 +130,7 @@ class GUI:
             pituus = 0
         pituus = min(pituus, 1000)
         self.paivita_pituus(pituus)
-        tarina = self.ohjelma.tarinan_muodostuksen_aloitus(alku, pituus)
+        tarina = self.ohjelma.tarinan_muodostuksen_aloitus(alku, pituus, 100)
         if tarina:
             self.tekstilaatikko.delete("1.0", tk.END)
             self.tekstilaatikko.insert("1.0", tarina)
