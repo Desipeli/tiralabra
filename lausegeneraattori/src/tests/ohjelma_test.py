@@ -181,4 +181,11 @@ class TestOhjelma(unittest.TestCase):
         self.ohjelma.lataa_tiedoston_sisalto(". yks kaks kolme")
         tarina = self.ohjelma.tarinan_muodostuksen_aloitus("yks kaks", 5)
         print(tarina)
-        self.assertAlmostEqual(tarina, "yks kaks....")
+        self.assertAlmostEqual(tarina, "yks kaks.....")
+
+    def test_tarina_katkaisin_1(self):
+        self.ohjelma.vaihda_aste(2)
+        self.ohjelma.lataa_tiedoston_sisalto("yks kaks kolme")
+        tarina = self.ohjelma.tarinan_muodostuksen_aloitus("yks kaks", 5, 1)
+        print(tarina)
+        self.assertAlmostEqual(tarina, "yks kaks kolme yks kaks kolme yks.")
