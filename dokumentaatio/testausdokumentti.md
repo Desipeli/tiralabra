@@ -1,6 +1,6 @@
 # Testausdokumentti
 
-[Suorituskyky](##Suorituskyky)
+[Suorituskyky](#Suorituskyky)
 
 ## Yksikkötestaus
 
