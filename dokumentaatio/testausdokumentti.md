@@ -46,3 +46,6 @@ Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, et
 ### Trie
 - Kun tekstitiedoston sisältö on muutettu listaksi sanoja ja merkkejä, pilkotaan saatu lista asteen pituisiin listoihin jotka tallennetaan trieen. Seuraavassa kaaviossa näkyy sekä pilkkomiseen että varsinaiseen tallentamiseen kuluva aika. Listan pilkkomisen vaikutus koko operaatioon on vähäinen, alle 0.1 sekuntia. Kaaviosta nähdään myös, että asteen kasvaessa tallentamiseen kuluva aika kasvaa lineaarisesti. Kaaviossa käytetyn tiedoston sanamäärä (sisältäen välimerkit) oli 146713.
 ![Tallennus Trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/pilkkominen_trieen.png)
+- Seuraavassa kahdessa kaaviossa on tallennettu useita tiedostaja trieen viisi kertaa, ja laskettu keskiarvo. Ensimmäisessä kaaviossa trie on tyhjennetty ennen jokaisen tiedoston tallennusta, kun taas toisessa ei. Tulosten vertailusta huomaa, että triestä jo löytyvien sanojenlistojen tallentaminen on nopeampaa kuin täysin uusien.
+![Kaikkien tallennus tyhjään trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/tallennus_trie_tyhennetaan.png)
+![Kaikkien talllennus trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/tallennus_trie_ei_tyhjenneta.png)
