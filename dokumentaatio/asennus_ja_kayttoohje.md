@@ -21,6 +21,7 @@ Käyttöliittymä koostuu vasemmalla olevasta toimintopalkista, sekä suurimman 
   - ``Muodosta tarina``: voidaan muodostaa tekstiä, jonka minimipituus (välimerkit lasketaan tässä sanoiksi) on alapuolella olevan kentän arvo.
   - ``Kopioi``: Kopioi tekstin leikepöydälle
   - ``Tyhjennä``: Tyhjentää tekstilaatikon
+  - ``Tyhjennä muisti``: Tyhjentää trien.
   
 
 ## Tekstikäyttöliittymä
