@@ -15,5 +15,3 @@ Toiminta on siis jaettu kolmeen kerrokseen: GUI (Käyttöliittymä) --> Ohjelma 
 ## Suorituskyky
 [Suorituskykytestien](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/testausdokumentti.md) perusteella asteen kasvaessa myös tallennukseen kuluva aika kasvaa lineaarisesti
 
-
-## Saavutetut aika- ja tilavaativuudet
