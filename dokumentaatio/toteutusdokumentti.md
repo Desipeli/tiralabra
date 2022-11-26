@@ -11,3 +11,9 @@ Luokat:
 - ``GUI``: Graafinen käyttöliittymä, jonka avulla ladataan tiedostoja ja käytetään ohjelmaa. GUI:lle injektoidaan TiedostonLukija- sekä Ohjelma-olio.
 
 Toiminta on siis jaettu kolmeen kerrokseen: GUI (Käyttöliittymä) --> Ohjelma (sovelluslogiikka) --> Trie (muisti/tietokanta)
+
+## Suorituskyky
+[Suorituskykytestien](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/testausdokumentti.md) perusteella asteen kasvaessa myös tallennukseen kuluva aika kasvaa lineaarisesti
+
+
+## Saavutetut aika- ja tilavaativuudet
