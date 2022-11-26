@@ -10,4 +10,4 @@ Luokat:
 - ``TiedostonLukija``: Tarjoaa toiminnot tiedostojen lukemiselle.
 - ``GUI``: Graafinen käyttöliittymä, jonka avulla ladataan tiedostoja ja käytetään ohjelmaa. GUI:lle injektoidaan TiedostonLukija- sekä Ohjelma-olio.
 
-- GUI muodostaa käyttöliittymän, Ohjelma sisältää sovelluslogiikan ja Trie toimii muistina/tietokantana.
+Toiminta on siis jaettu kolmeen kerrokseen: GUI (Käyttöliittymä) --> Ohjelma (sovelluslogiikka) --> Trie (muisti/tietokanta)
