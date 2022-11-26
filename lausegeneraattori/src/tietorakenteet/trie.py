@@ -46,7 +46,7 @@ class Trie:
         """
         sana = sanalista[syvyys]
 
-        if sana in solmu.lapset.keys():
+        if sana in solmu.lapset:
             solmu.lapset[sana].lukumaara += 1
             uusi_solmu = solmu.lapset[sana]
         else:
@@ -93,7 +93,7 @@ class Trie:
         if syvyys == len(sanalista):
             return self._arvo_solmu(solmu)
         sana = sanalista[syvyys]
-        if sana in solmu.lapset.keys():
+        if sana in solmu.lapset:
             uusi_solmu = solmu.lapset[sana]
         else:
             return None

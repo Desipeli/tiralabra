@@ -85,6 +85,7 @@ class Ohjelma:
             self._trie.lisaa_sanalista(sanalista)
             aika_trie += time.time() - alku_trie
         print(f"aste: {aste} listat: {aika_sanalista} trie: {aika_trie}")
+        print("Valmis")
         return True
 
     def lauseen_muodostuksen_aloitus(self, alku: str, katkaisin: int = 20):
