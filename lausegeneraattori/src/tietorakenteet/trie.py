@@ -14,6 +14,7 @@ class Trie:
 
         """
         self._arpa = arpa
+        self._solmujen_lkm = 0
         self.root = TrieSolmu("")
 
     def lisaa_sanalista(self, sanalista: list):
@@ -52,6 +53,7 @@ class Trie:
         else:
             uusi_solmu = TrieSolmu(sana)
             solmu.lapset[sana] = uusi_solmu
+            self._solmujen_lkm += 1
 
         solmu.lapsien_lukumaara += 1
 
@@ -70,7 +72,6 @@ class Trie:
 
         Palauttaa sanan tai arvon None
         """
-
         loydetty_solmu = self._etsi_seuraava_sana(sanalista, self.root , 0)
         if loydetty_solmu:
             return loydetty_solmu.sana
@@ -136,7 +137,6 @@ class Trie:
         Jos päästään loppuun, aloitetaan alusta kunnes päästään
         taas ensimmäisenä valittuun sanaan ja palautetaan se.
         """
-
         valittu_sana = self._arpa.arvo_joukosta(self.root.lapset)
 
         if not valittu_sana:
@@ -176,3 +176,6 @@ class Trie:
         for lapsisolmu in solmu.lapset.values():
             lista.append(lapsisolmu)
             self._syvyys_solmu(lapsisolmu, lista)
+
+    def solmujen_lkm(self):
+        return self._solmujen_lkm

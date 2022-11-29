@@ -85,7 +85,6 @@ class Ohjelma:
             self._trie.lisaa_sanalista(sanalista)
             aika_trie += time.time() - alku_trie
         print(f"aste: {aste} listat: {aika_sanalista} trie: {aika_trie}")
-        print("Valmis")
         return True
 
     def lauseen_muodostuksen_aloitus(self, alku: str, katkaisin: int = 20):
@@ -101,7 +100,6 @@ class Ohjelma:
         """
         if self.hae_trien_koko() == 0:
             return False
-
         if len(alku) == 0:
             alku = self._trie.hae_sana_juuresta_isolla_alkukirjaimella()
         jasennetty = self._jasennin.jasenna_listaksi(alku)
@@ -195,7 +193,7 @@ class Ohjelma:
 
     def hae_trien_koko(self):
         """ palautetaan solmujen lkm """
-        return len(self._trie.syvyyspuu())
+        return self._trie.solmujen_lkm()
 
     def tyhjenna_trie(self):
         """ Luodaan uusi trie vanhan tilalle """
