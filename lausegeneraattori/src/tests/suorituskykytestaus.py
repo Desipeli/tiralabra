@@ -25,14 +25,23 @@ class SuoritusTestaus:
         self.datapolku = os.path.join(os.path.dirname(__file__), "../data")
         tiedostot = self.tiedostonlukija.kaikkien_tiedostojen_nimet(self.datapolku)
 
-        tulokset = self.kaikkien_tiedostojen_tallennus_tyhjaan_trieen(tiedostot, 1)
-        self.kaikki_tyhjaan_trieen_kuvaaja(tulokset)
+        # tulokset = self.kaikkien_tiedostojen_tallennus_tyhjaan_trieen(tiedostot, 1)
+        # self.kaikki_tyhjaan_trieen_kuvaaja(tulokset)
 
-        tulokset = self.kaikkien_tiedostojen_tallennus_trieen(tiedostot, 1)
-        self.kaikki_trieen_kuvaaja(tulokset)
+        # tulokset = self.kaikkien_tiedostojen_tallennus_trieen(tiedostot, 1)
+        # self.kaikki_trieen_kuvaaja(tulokset)
 
-        tulokset = self.tekstin_jasennys_listaksi(tiedostot)
-        self.teksti_listaksi_kuvaaja(tulokset)
+        # tulokset = self.tekstin_jasennys_listaksi(tiedostot)
+        # self.teksti_listaksi_kuvaaja(tulokset)
+
+        # Turhahko, eroa ei juuri näy
+        # tulokset = self.lauseen_muodostus_ohjelmalla(tiedostot, 10, 10)
+        # self.lauseen_muodostus_kuvaaja(tulokset)
+
+        tulokset = self.asteen_vaikutus_solmujen_lukumaaraan(7, tiedostot)
+        self.tilavaativuus_kuvaaja(tulokset)
+
+    ### Tallennuksiin liittyvät
 
     def kaikkien_tiedostojen_tallennus_tyhjaan_trieen(self, tiedostot: list, aste: int, toistot: int = 5):
         """
@@ -98,6 +107,48 @@ class SuoritusTestaus:
             tulokset.append((tiedosto, time()-alku, len(lista)))
         return tulokset
 
+    ### Hakutoimintoihin liittyvät
+
+    def lauseen_muodostus_ohjelmalla(self, tiedostot: list, asteeseen_asti: int, toistot):
+        tulokset_ei_alkua = []
+        tulokset_alulla = []
+        for aste in range(0, asteeseen_asti):
+            self.ohjelma.vaihda_aste(aste)
+            self.ohjelma.tyhjenna_trie()
+            for tiedosto in tiedostot:
+                self.ohjelma.lataa_tiedoston_sisalto(
+                    self.tiedostonlukija.lue(os.path.join(self.datapolku, tiedosto)))
+            trien_koko = self.ohjelma.hae_trien_koko()
+            summa = 0
+            for toisto in range(toistot):
+                muodostus_alkaa = time()
+                lause = self.ohjelma.lauseen_muodostuksen_aloitus("")
+                print(lause)
+                summa += time() - muodostus_alkaa
+            tulokset_ei_alkua.append((trien_koko, summa / toistot, aste))
+            summa = 0
+            for toisto in range(toistot):
+                muodostus_alkaa = time()
+                lause = self.ohjelma.lauseen_muodostuksen_aloitus("Pöö")
+                print(lause)
+                summa += time() - muodostus_alkaa
+            tulokset_alulla.append((trien_koko, summa / toistot, aste))
+        return tulokset_ei_alkua, tulokset_alulla
+                            
+    ### Tila
+    def asteen_vaikutus_solmujen_lukumaaraan(self, asteeseen_asti: int, tiedostot):
+        tulokset = []
+        for aste in range(asteeseen_asti):
+            self.ohjelma.vaihda_aste(aste)
+            self.ohjelma.tyhjenna_trie()
+            for tiedosto in tiedostot:
+                self.ohjelma.lataa_tiedoston_sisalto(
+                    self.tiedostonlukija.lue(os.path.join(self.datapolku, tiedosto)))
+            tulokset.append((aste, self.ohjelma.hae_trien_koko()))
+        return tulokset
+
+
+
     def teksti_listaksi_kuvaaja(self, tulokset):
         """
         Kuvaaja näyttää, miten sanojen määrä vaikuttaa tiedoston
@@ -144,6 +195,36 @@ class SuoritusTestaus:
         plt.title("Tallennukseen kuluva aika, kun trieä ei tyhjennetä")
         plt.show()
 
+    def lauseen_muodostus_kuvaaja(self, tulokset: tuple):
+        """
+        Kuvaaaja näyttää lauseen muodostukseen kuluneen ajan. Erikseen ilman alkua ja alulla
+        """
+        ei_alkua = sorted(tulokset[0], key=lambda a: a[0])
+        alulla =  sorted(tulokset[1], key=lambda a: a[0])
+        x = [f"{x[2]}, solmuja {x[0]}" for x in ei_alkua]
+        y = [y[1] for y in ei_alkua]
+        plt.plot(x, y, label="ei alkua")
+        
+        x = [f"{x[2]}, solmuja {x[0]}" for x in alulla]
+        y = [y[1] for y in alulla]
+        plt.plot(x, y, label="on alku")
+
+        asteet = [aste for aste in range(len(alulla))]
+        print(asteet)
+        plt.xlabel(f"aste")
+        plt.ylabel("Aika (s)")
+        plt.legend()
+        plt.show()
+
+    def tilavaativuus_kuvaaja(self, tulokset):
+        tulokset = sorted(tulokset, key=lambda a: a[0])
+        x = [x[0] for x in tulokset]
+        y = [y[1] for y in tulokset]
+        plt.plot(x, y)
+        plt.xlabel("Aste")
+        plt.ylabel("Solmujen lkm")
+        plt.title("Solmujen lkm asteen kasvaessa")
+        plt.show()
 
 if __name__ == "__main__":
     testaus = SuoritusTestaus()
