@@ -12,6 +12,6 @@ Luokat:
 
 Toiminta on siis jaettu kolmeen kerrokseen: GUI (Käyttöliittymä) --> Ohjelma (sovelluslogiikka) --> Trie (muisti/tietokanta)
 
-## Suorituskyky
-[Suorituskykytestien](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/testausdokumentti.md#Suorituskyky) perusteella asteen tai sanamäärän kasvaessa myös tallennukseen kuluva aika kasvaa lineaarisesti
-
+## Suorituskyky ja tilavaativuus
+- [Suorituskykytestien](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/testausdokumentti.md#Suorituskyky) perusteella asteen tai sanamäärän kasvaessa myös tallennukseen kuluva aika kasvaa lineaarisesti. Trien solmujen määrä kasvaa myös lineaarisesti asteen kasvaessa. 
+- Lauseen muodostus on normaalikäytössä (asteen ollessa alle 10) niin nopeaa, että eroja ei juuri huomaa. Lauseen muodostukseen kuluva aika on keskiarvoltaan alle 0.005 s. Jos triestä halutaan isolla alkukirjaimella alkava sana, saattaa siihen kulua hieman (0.001 - 0.003 s) enemmän aikaa.
