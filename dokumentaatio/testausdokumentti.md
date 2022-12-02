@@ -51,3 +51,5 @@ Pääohjelman testaus on enimmäkseen integraatiotestausta. Siinä testataan, et
 - Seuraavassa kahdessa kaaviossa on tallennettu useita tiedostoja trieen viisi kertaa, ja laskettu keskiarvo. Ensimmäisessä kaaviossa trie on tyhjennetty ennen jokaisen tiedoston tallennusta, kun taas toisessa ei. Tulosten vertailusta huomaa, että triestä jo löytyvien sanalistojen tallentaminen on nopeampaa kuin täysin uusien.
 ![Kaikkien tallennus tyhjään trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/tallennus_trie_tyhennetaan.png)
 ![Kaikkien talllennus trieen](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/tallennus_trie_ei_tyhjenneta.png)
+- Solmujen lukumäärä kasvaa lineaarisesti asteen kasvaessa:
+![tilavaativuus](https://raw.githubusercontent.com/Desipeli/tiralabra/main/dokumentaatio/tilavaativuus.png)
