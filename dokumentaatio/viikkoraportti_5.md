@@ -6,7 +6,7 @@ käytetty tuntimäärä n.4
 
 - Vertaisarviointi
 - Vähän testaamista
-- Bugikorjaus
+- Lauseen muodostus nopeammaksi
 
 ## Miten ohjelma on edistynyt
 
