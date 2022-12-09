@@ -78,21 +78,22 @@ class GUI:
                         "*.*")))
         self.konsoli.kirjoita("Aloitetaan tiedostojen lataaminen")
         for nimi in tiedostojen_nimet:
-            self.konsoli.kirjoita(f"Luetaan tiedosoton {nimi} sisältö")
+            self.konsoli.kirjoita(f"Ladataan tiedoston {nimi} sisältö")
             sisalto = self.tiedostonlukija.lue(nimi)
-            self.konsoli.kirjoita("Ladataan sisältö ohjelmaan")
             lataus_alkaa = time()
             onnistui = self.ohjelma.lataa_tiedoston_sisalto(sisalto)
-            self.konsoli.kirjoita(f"{time() - lataus_alkaa} s")
+            self.konsoli.kirjoita(f"aikaa kului {time() - lataus_alkaa} s")
             if not onnistui:
                 messagebox.showerror(message=f"Tiedostoa {nimi} ei voitu ladata")
+        self.konsoli.kirjoita("Valmis")
         self.paivita_solmut()
 
     def vaihda_aste(self):
         """ Pyydetään käyttäjältä uusi aste """
         aste = self.hae_aste()
         uusi_aste = simpledialog.askinteger(title="Aste", prompt=f"Nykyinen aste on {aste}")
-        self.ohjelma.vaihda_aste(uusi_aste)
+        if type(uusi_aste) == int:
+            self.ohjelma.vaihda_aste(uusi_aste)
         self.paivita_aste(self.hae_aste())
 
     def hae_aste(self):

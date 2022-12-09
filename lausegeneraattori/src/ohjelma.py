@@ -71,20 +71,14 @@ class Ohjelma:
         aste = self._aste
         if aste >= len(data):
             return False
-        aika_sanalista = 0
-        aika_trie = 0
+
         for i in range(len(data) - aste):
-            alku_sanalista = time.time()
             sanalista = []
             dataosoitin = i
             while dataosoitin < i + aste + 1 and dataosoitin < len(data):
                 sanalista.append(data[dataosoitin])
                 dataosoitin += 1
-            aika_sanalista += time.time() - alku_sanalista
-            alku_trie = time.time()
             self._trie.lisaa_sanalista(sanalista)
-            aika_trie += time.time() - alku_trie
-        print(f"aste: {aste} listat: {aika_sanalista} trie: {aika_trie}")
         return True
 
     def lauseen_muodostuksen_aloitus(self, alku: str, katkaisin: int = 20):
