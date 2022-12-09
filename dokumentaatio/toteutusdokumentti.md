@@ -15,3 +15,9 @@ Toiminta on siis jaettu kolmeen kerrokseen: GUI (Käyttöliittymä) --> Ohjelma 
 ## Suorituskyky ja tilavaativuus
 - [Suorituskykytestien](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/testausdokumentti.md#Suorituskyky) perusteella asteen tai sanamäärän kasvaessa myös tallennukseen kuluva aika kasvaa lineaarisesti. Trien solmujen määrä kasvaa myös lineaarisesti asteen kasvaessa. 
 - Lauseen muodostus on normaalikäytössä (asteen ollessa alle 10) niin nopeaa, että eroja ei juuri huomaa. Lauseen muodostukseen kuluva aika on keskiarvoltaan alle 0.005 s. Jos triestä halutaan lauseen ensimmäiseksi sanaksi isolla alkukirjaimella alkava sana, saattaa siihen kulua hieman (0.001 - 0.003 s) enemmän aikaa.
+
+## Perusteluja
+
+### Sanan haku tirestä
+
+- Trien funktio `hae` saa parametrina listan sanoja, joiden perusteella noudetaan uusi sana. Sanalistan pituus määrittää, kuinka syvältä puusta sana haetaan (Markovin ketjun aste). Aloitetaan siis tarkastelemalla trien juuresta, löytyykö sen lapsisolmuista sanalistan ensimmäistä sanaa. Jos löytyy, siirrytään siihen solmuun ja katsotaan, löytyykö sen lapsisolmuista listan seuraava sana jne. Jos päästään listan viimeiseen sanaan asti, arvotaan jokin sana sen lapsisolmuista painottamalla sanojen esiintymistiheyttä. Arvonta joutuu pahimmassa tapauksessa käymään kertaalleen läpi kaikki lapsisolmut. Aikavaativuudeksi saadaan siis O(nm), jossa n on sanalistan pituus ja m on viimeisen solmun lapsisolmujen määrä. Tähän mennessä suoritettujen testien perusteella haku toimii vakioajassa, sillä käytännössä n:n ja m:n arvot pysyvät hyvin pieninä.
