@@ -1,7 +1,7 @@
 # Vaatimukset
 
 - python 3.8 tai uudempi
-- poetry 1.2.2 tai uudempi
+- poetry 1.2.2 tai uudempi. Huom ei toimi versiolla 1.1!
 
 # Asennus
 
