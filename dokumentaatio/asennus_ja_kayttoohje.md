@@ -30,7 +30,7 @@ Käyttöliittymä koostuu vasemmalla olevasta toimintopalkista, sekä suurimman 
 
 ## Tekstikäyttöliittymä
 
-En suosittele, graafinen on helpompi käyttää.
+En suosittele, graafinen on helpompi käyttää. Voidaan käynnistää Linuxilla `poetry run python3 src/index.py teksti`, ja Windowsilla `poetry run python src\index.py teksti` hakemistossa `lausegeneraattori`
 
 - Päävalikossa syötetään komentoa vastaava numero/kirjain ja painetaan `enter`
   - 1: Voidaan vaihtaa Markovin ketjun astetta. Jos ohjelmaan on jo ladattu tiedostoja, niiden tiedot katoavat tämän komennon jälkeen. Asteen on oltava 0 tai suurempi kokonaisluku
