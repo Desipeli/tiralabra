@@ -84,7 +84,7 @@ class GUI:
             onnistui = self.ohjelma.lataa_tiedoston_sisalto(sisalto)
             self.konsoli.kirjoita(f"aikaa kului {time() - lataus_alkaa} s")
             if not onnistui:
-                messagebox.showerror(message=f"Tiedostoa {nimi} ei voitu ladata")
+                messagebox.showerror(message=f"Tiedostoa {nimi} ei voitu ladata. Tiedostossa on oltava vähintään aste + 1 sanaa")
         self.konsoli.kirjoita("Valmis")
         self.paivita_solmut()
 
