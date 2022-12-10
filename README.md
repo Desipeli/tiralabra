@@ -15,3 +15,4 @@ Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit
 - [Viikko 3](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/viikkoraportti_3.md)
 - [Viikko 4](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/viikkoraportti_4.md)
 - [Viikko 5](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/viikkoraportti_5.md)
+- [Viikko 6](https://github.com/Desipeli/tiralabra/blob/main/dokumentaatio/viikkoraportti_6.md)
