@@ -50,7 +50,7 @@ class GUI:
             text="Muodosta tarina",
             command=self.muodosta_tarina)
         nappi_kopioi = tk.Button(toimintokehys, text="Kopioi", command=self.kopioi_teksti)
-        nappi_tyhjenna = tk.Button(toimintokehys, text="Tyhennä", command=self.tyhjenna)
+        nappi_tyhjenna = tk.Button(toimintokehys, text="Tyhjennä", command=self.tyhjenna)
         nappi_tyhjenna_trie = tk.Button(toimintokehys,
             text="Tyhjennä muisti", command=self.tyhjenna_trie)
 
