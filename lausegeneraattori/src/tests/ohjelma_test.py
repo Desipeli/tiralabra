@@ -40,6 +40,15 @@ class TestOhjelma(unittest.TestCase):
 
     # Trieen tallennus
 
+    def test_trien_tyhjennys(self):
+        self.ohjelma.vaihda_aste(0)
+        self.ohjelma.lataa_tiedoston_sisalto("Olipa kerran ohjelma")
+        self.assertEqual(self.ohjelma.hae_trien_koko(), 3)
+
+        self.ohjelma.tyhjenna_trie()
+        self.assertEqual(self.ohjelma.hae_trien_koko(), 0)
+
+
     def test_tyhjan_merkkijonon_tallennus_trieen(self):
         palaute = self.ohjelma.lataa_tiedoston_sisalto("")
         self.assertEqual(palaute, False)
