@@ -1,4 +1,3 @@
-import time
 from tietorakenteet.trie import Trie
 from jasennin import Jasennin
 from arpa import Arpa
