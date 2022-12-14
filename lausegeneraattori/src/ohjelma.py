@@ -158,10 +158,13 @@ class Ohjelma:
 
         while True:
             sana = None
-            if self._aste == 0 or katki == 0:
+            if katki == 0:
                 sana = self._arpa.arvo_joukosta(lopetusmerkit)
             else:
-                sana = self._uusi_sana_edellisten_perusteella(teksti[-self._aste : ])
+                if self._aste == 0:
+                    sana = self._trie.hae([])
+                else:
+                    sana = self._uusi_sana_edellisten_perusteella(teksti[-self._aste : ])
             teksti.append(sana)
             if sana in lopetusmerkit:
                 break
