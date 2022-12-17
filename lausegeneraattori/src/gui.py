@@ -112,7 +112,7 @@ class GUI:
 
         maara = simpledialog.askinteger(title="Kirjojen määrä",
             prompt="Montako kirjaa ladataan?")
-        if type(maara) == int:
+        if isinstance(maara, int):
             print("Aloitetaan kirjojen lataaminen")
             latauspalkki, latauspalkki_tausta = self.luo_latauspalkki()
             self.gutenberg.sekoita_kirjalista()

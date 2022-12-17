@@ -1,11 +1,11 @@
-import requests
 import random
+import requests
 from bs4 import BeautifulSoup as BS
 
 
 class GutenbergLukija:
     def __init__(self, url: str = None) -> None:
-        """ 
+        """
         url: sivu, jossa kirjat on listattu
         self._book_urls: Lista kirjojen linkeistä
         """
@@ -35,7 +35,7 @@ class GutenbergLukija:
         return teksti
 
     def hae_linkit(self):
-        """ 
+        """
         Etsitään kaikki kirjalinkit sivulta
         """
         if not self._url or not self._base_url:
@@ -43,26 +43,17 @@ class GutenbergLukija:
 
         self._kirjalista = []
 
-        req = requests.get(self._url)
+        req = requests.get(self._url, timeout=10)
         keitto = BS(req.text, "html.parser")
 
         for linkki in keitto.find_all("a"):
             link_teksti = linkki.get("href")
             if link_teksti and "ebooks" in link_teksti:
                 self._kirjalista.append(link_teksti)
+        return True
 
     def hae_teksti(self, link: str):
         """ Haetaan sivulla oleva teksti """
         kokolinkki = self._base_url + link + ".txt.utf-8"
-        req = requests.get(kokolinkki)
+        req = requests.get(kokolinkki, timeout=10)
         return req.content.decode("utf-8")
-            
-
-
-
-if __name__ == "__main__":
-    gr = GutenbergLukija("https://www.gutenberg.org/browse/languages/fi")
-    gr.hae_linkit()
-    gr.sekoita_kirjalista()
-    kirja = gr.hae_kirja()
-    print(kirja)
