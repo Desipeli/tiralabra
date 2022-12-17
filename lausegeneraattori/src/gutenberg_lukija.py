@@ -19,9 +19,14 @@ class GutenbergLukija:
         self._url = url
 
     def sekoita_kirjalista(self):
+        """ Sekoitetaan kirjalista """
         random.shuffle(self._kirjalista)
 
+    def kirjalistan_koko(self):
+        return len(self._kirjalista)
+
     def hae_kirja(self):
+        """ Haetaan listan viimeinen kirja """
         if len(self._kirjalista) == 0:
             return False
         linkki = self._kirjalista.pop()
@@ -36,6 +41,8 @@ class GutenbergLukija:
         if not self._url or not self._base_url:
             return False
 
+        self._kirjalista = []
+
         req = requests.get(self._url)
         keitto = BS(req.text, "html.parser")
 
@@ -45,6 +52,7 @@ class GutenbergLukija:
                 self._kirjalista.append(link_teksti)
 
     def hae_teksti(self, link: str):
+        """ Haetaan sivulla oleva teksti """
         kokolinkki = self._base_url + link + ".txt.utf-8"
         req = requests.get(kokolinkki)
         return req.content.decode("utf-8")

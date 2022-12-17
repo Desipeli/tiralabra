@@ -7,6 +7,7 @@ from tiedostonlukija import TiedostonLukija
 from konsoli import Konsoli
 from gutenberg_lukija import GutenbergLukija
 
+
 class GUI:
     """ Graafinen käyttöliittymä """
     def __init__(self,
@@ -39,7 +40,7 @@ class GUI:
     def luo_toimintokehyksen_osat(self, toimintokehys):
         """ Luodaan ja piirretään GUI:n vasen palkki """
         nappi_lataa = tk.Button(toimintokehys,
-            text="Lataa tiedostoja",
+            text="Lataa paikallisia tiedostoja",
             command=self.lataa_paikallisia_tiedostoja)
         nappi_gutenberg = tk.Button(toimintokehys,
             text="Lataa Gutenberg",
@@ -87,12 +88,8 @@ class GUI:
         self.konsoli.kirjoita("Aloitetaan tiedostojen lataaminen")
         tiedostoja_ladattu = 0
         tiedostoja_yhteensa = len(tiedostojen_nimet)
-        latauspalkki_tausta = tk.Tk()
-        latauspalkki_tausta.title("Ladataan tiedostoja")
-        latauspalkki_tausta.geometry("300x50")
-        latauspalkki_tausta.attributes("-topmost", True)
-        latauspalkki = ttk.Progressbar(latauspalkki_tausta, orient="horizontal", length=300)
-        latauspalkki.grid(row=0, column=0, sticky="ew")
+        latauspalkki, latauspalkki_tausta = self.luo_latauspalkki()
+        self.ikkuna.update_idletasks()
         for nimi in tiedostojen_nimet:
             self.konsoli.kirjoita(f"Ladataan tiedoston {nimi} sisältö")
             sisalto = self.tiedostonlukija.lue(nimi)
@@ -109,6 +106,52 @@ class GUI:
         self.konsoli.kirjoita("Valmis")
         latauspalkki_tausta.destroy()
         self.paivita_solmut()
+
+    def kysy_gutenberg(self):
+        self.vaihda_gutenberg_url()
+
+        maara = simpledialog.askinteger(title="Kirjojen määrä",
+            prompt="Montako kirjaa ladataan?")
+        if type(maara) == int:
+            print("Aloitetaan kirjojen lataaminen")
+            latauspalkki, latauspalkki_tausta = self.luo_latauspalkki()
+            self.gutenberg.sekoita_kirjalista()
+            latauspalkki["value"] = 0 / maara * 100
+            self.ikkuna.update_idletasks()
+            for i in range(1, maara + 1):
+                print(i)
+                if self.gutenberg.kirjalistan_koko() == 0:
+                    print("Ei enempää kirjoja")
+                    break
+                self.hae_gutenberg()
+                self.paivita_solmut()
+                latauspalkki["value"] = i / maara * 100
+                self.ikkuna.update_idletasks()
+            latauspalkki_tausta.destroy()
+            print("Valmis")
+
+    def hae_gutenberg(self):
+        kirja = self.gutenberg.hae_kirja()
+        if not kirja:
+            return False
+        return self.ohjelma.lataa_tiedoston_sisalto(kirja)
+
+    def vaihda_gutenberg_url(self):
+        url = simpledialog.askstring(title="Mistä ladataan?",
+            prompt="Esim. https://www.gutenberg.org/browse/languages/fi")
+        if url:
+            self.gutenberg.aseta_url(url)
+            self.gutenberg.hae_linkit()
+
+    def luo_latauspalkki(self):
+        latauspalkki_tausta = tk.Tk()
+        latauspalkki_tausta.title("Ladataan tiedostoja")
+        latauspalkki_tausta.geometry("300x50")
+        latauspalkki_tausta.attributes("-topmost", True)
+        latauspalkki = ttk.Progressbar(latauspalkki_tausta, orient="horizontal", length=300)
+        latauspalkki.grid(row=0, column=0, sticky="ew")
+
+        return latauspalkki, latauspalkki_tausta
 
     def vaihda_aste(self):
         """ Pyydetään käyttäjältä uusi aste """
@@ -184,21 +227,3 @@ class GUI:
         """ Tyhentää trien """
         self.ohjelma.tyhjenna_trie()
         self.paivita_solmut()
-
-    def kysy_gutenberg(self):
-        maara = simpledialog.askinteger(title="Kirjojen määrä",
-            prompt=f"Montako kirjaa ladataan?")
-        if type(maara) == int:
-            print("Aloitetaan kirjojen lataaminen")
-            self.gutenberg.sekoita_kirjalista()
-            for i in range(maara):
-                print(i)
-                self.hae_gutenberg()
-                self.paivita_solmut()
-            print("Valmis")
-
-    def hae_gutenberg(self):
-        kirja = self.gutenberg.hae_kirja()
-        if not kirja:
-            return False
-        return self.ohjelma.lataa_tiedoston_sisalto(kirja)
