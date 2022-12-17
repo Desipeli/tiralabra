@@ -1,7 +1,7 @@
 import os
 from time import time
 import tkinter as tk
-from tkinter import filedialog, simpledialog, messagebox
+from tkinter import filedialog, simpledialog, messagebox, ttk
 from ohjelma import Ohjelma
 from tiedostonlukija import TiedostonLukija
 from konsoli import Konsoli
@@ -26,10 +26,8 @@ class GUI:
         self.ikkuna.rowconfigure(0, minsize=400, weight=1)
         self.ikkuna.columnconfigure(1, minsize=300, weight=1)
         self.ikkuna.title("Lausegeneraattori")
-
         self.tekstilaatikko = tk.Text(self.ikkuna)
         toimintokehys = tk.Frame(self.ikkuna, relief=tk.RAISED, bd=2)
-
 
         toimintokehys.grid(row=0, column=0, sticky="ns")
         self.tekstilaatikko.grid(row=0, column=1, sticky="nsew")
@@ -59,7 +57,7 @@ class GUI:
             text="Muodosta tarina",
             command=self.muodosta_tarina)
         nappi_kopioi = tk.Button(toimintokehys, text="Kopioi", command=self.kopioi_teksti)
-        nappi_tyhjenna = tk.Button(toimintokehys, text="Tyhennä", command=self.tyhjenna)
+        nappi_tyhjenna = tk.Button(toimintokehys, text="Tyhjennä", command=self.tyhjenna)
         nappi_tyhjenna_trie = tk.Button(toimintokehys,
             text="Tyhjennä muisti", command=self.tyhjenna_trie)
 
@@ -87,6 +85,14 @@ class GUI:
                         ("all files",
                         "*.*")))
         self.konsoli.kirjoita("Aloitetaan tiedostojen lataaminen")
+        tiedostoja_ladattu = 0
+        tiedostoja_yhteensa = len(tiedostojen_nimet)
+        latauspalkki_tausta = tk.Tk()
+        latauspalkki_tausta.title("Ladataan tiedostoja")
+        latauspalkki_tausta.geometry("300x50")
+        latauspalkki_tausta.attributes("-topmost", True)
+        latauspalkki = ttk.Progressbar(latauspalkki_tausta, orient="horizontal", length=300)
+        latauspalkki.grid(row=0, column=0, sticky="ew")
         for nimi in tiedostojen_nimet:
             self.konsoli.kirjoita(f"Ladataan tiedoston {nimi} sisältö")
             sisalto = self.tiedostonlukija.lue(nimi)
@@ -94,15 +100,21 @@ class GUI:
             onnistui = self.ohjelma.lataa_tiedoston_sisalto(sisalto)
             self.konsoli.kirjoita(f"aikaa kului {time() - lataus_alkaa} s")
             if not onnistui:
-                messagebox.showerror(message=f"Tiedostoa {nimi} ei voitu ladata. Tiedostossa on oltava vähintään aste + 1 sanaa")
+                m_1 = f"Tiedostoa {nimi} ei voitu ladata."
+                m_2 = " Tiedostossa on oltava vähintään aste + 1 sanaa"
+                messagebox.showerror(message=m_1+m_2)
+            tiedostoja_ladattu += 1
+            latauspalkki["value"] = tiedostoja_ladattu / tiedostoja_yhteensa * 100
+            self.ikkuna.update_idletasks()
         self.konsoli.kirjoita("Valmis")
+        latauspalkki_tausta.destroy()
         self.paivita_solmut()
 
     def vaihda_aste(self):
         """ Pyydetään käyttäjältä uusi aste """
         aste = self.hae_aste()
         uusi_aste = simpledialog.askinteger(title="Aste", prompt=f"Nykyinen aste on {aste}")
-        if type(uusi_aste) == int:
+        if isinstance(uusi_aste, int):
             self.ohjelma.vaihda_aste(uusi_aste)
         self.paivita_aste(self.hae_aste())
 
@@ -119,7 +131,6 @@ class GUI:
         """
         Lähetetään ohjelmalle tekstilaatikon sisältö ja tulostetaan
         samaan laatikkoon saatu lause. Aikaisempi teksti säilyy.
-        
         """
         alku = self.tekstilaatikko.get("1.0", tk.END).rstrip()
         lause = self.ohjelma.lauseen_muodostuksen_aloitus(alku, 100)
@@ -134,7 +145,6 @@ class GUI:
         """
         Lähetetään ohjelmalle tekstilaatikon sisältö ja pituusrajoitus.
         Tulostetaan samaan laatikkoon saatu tarina. Aikaisempi teksti säilyy.
-        
         """
         alku = self.tekstilaatikko.get("1.0", tk.END).rstrip()
         pituus = self.input_tarinan_pituus.get()
@@ -169,7 +179,7 @@ class GUI:
     def tyhjenna(self):
         """ Tyhjentää tekstilaatikon sisällön """
         self.tekstilaatikko.delete("1.0", tk.END)
-    
+
     def tyhjenna_trie(self):
         """ Tyhentää trien """
         self.ohjelma.tyhjenna_trie()

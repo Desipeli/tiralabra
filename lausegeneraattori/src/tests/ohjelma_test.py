@@ -40,6 +40,15 @@ class TestOhjelma(unittest.TestCase):
 
     # Trieen tallennus
 
+    def test_trien_tyhjennys(self):
+        self.ohjelma.vaihda_aste(0)
+        self.ohjelma.lataa_tiedoston_sisalto("Olipa kerran ohjelma")
+        self.assertEqual(self.ohjelma.hae_trien_koko(), 3)
+
+        self.ohjelma.tyhjenna_trie()
+        self.assertEqual(self.ohjelma.hae_trien_koko(), 0)
+
+
     def test_tyhjan_merkkijonon_tallennus_trieen(self):
         palaute = self.ohjelma.lataa_tiedoston_sisalto("")
         self.assertEqual(palaute, False)
@@ -103,13 +112,18 @@ class TestOhjelma(unittest.TestCase):
         self.ohjelma.vaihda_aste(0)
         self.ohjelma.lataa_tiedoston_sisalto("yks kaks kolme")
         lause = self.ohjelma.lauseen_muodostuksen_aloitus("")
-        self.assertEqual(lause, "yks.")
+        self.assertEqual(lause,
+            "yks yks yks yks yks yks yks yks yks yks " +
+            "yks yks yks yks yks yks yks yks yks yks yks."
+            )
 
     def test_lause_triessa_pienella_alkavia_on_alku_aste_0(self):
         self.ohjelma.vaihda_aste(0)
         self.ohjelma.lataa_tiedoston_sisalto("yks kaks kolme")
         lause = self.ohjelma.lauseen_muodostuksen_aloitus("Olipa kerran")
-        self.assertEqual(lause, "Olipa kerran.")
+        self.assertEqual(lause,
+            "Olipa kerran yks yks yks yks yks yks yks yks yks " +
+            "yks yks yks yks yks yks yks yks yks yks yks.")
 
     def test_lause_triessa_ei_lopetusmerkkeja_aste_2(self):
         self.ohjelma.vaihda_aste(2)
