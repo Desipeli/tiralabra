@@ -10,3 +10,4 @@ omit =
     src/tekstikayttoliittyma.py,
     src/tietorakenteet/__init__.py
     src/gui.py
+    src/gutenberg_lukija.py
