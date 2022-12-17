@@ -101,3 +101,17 @@ class TestJasennin(unittest.TestCase):
         )
 
         self.assertAlmostEqual(jasennetty, "! jaa?? juu,")
+
+    # Gutenberg
+
+    def test_poista_gutenberg_ennen_tekstia(self):
+        jasennetty = self.jasennin.poista_gutenberg(
+            ["moi", "hei", "***", "START", "of...", "***", "juu, joo, jaa"]
+        )
+        self.assertEqual(jasennetty, ["juu, joo, jaa"])
+
+    def test_poista_gutenberg_jalkeen_tekstin(self):
+        jasennetty = self.jasennin.poista_gutenberg(
+            ["***", "***", "moi", "***", "hei"]
+        )
+        self.assertEqual(jasennetty, ["moi"])
