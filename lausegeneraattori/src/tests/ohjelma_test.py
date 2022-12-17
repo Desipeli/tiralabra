@@ -2,6 +2,10 @@ import unittest
 from jasennin import Jasennin
 from ohjelma import Ohjelma
 
+class StubJasennin(Jasennin):
+    def poista_gutenberg(self, sanat: list) -> list:
+        return sanat
+
 class StubArpa1:
     def arvo_kokonaisluku(self, a, b):
         return 1
@@ -14,7 +18,7 @@ class StubArpa1:
 
 class TestOhjelma(unittest.TestCase):
     def setUp(self):
-        self.ohjelma = Ohjelma(Jasennin(), StubArpa1())
+        self.ohjelma = Ohjelma(StubJasennin(), StubArpa1())
 
     # Aste
 
