@@ -8,6 +8,7 @@ from ohjelma import Ohjelma
 from tekstikayttoliittyma import TekstiKayttoliittyma
 from gui import GUI
 from tests.suorituskykytestaus import SuoritusTestaus
+from gutenberg_lukija import GutenbergLukija
 
 
 
@@ -16,6 +17,7 @@ if __name__ == "__main__":
     konsoli = Konsoli()
     tiedostonlukija = TiedostonLukija()
     jasennin = Jasennin()
+    gutenberg_lukija = GutenbergLukija("https://www.gutenberg.org/browse/languages/fi")
     ohjelma = Ohjelma(jasennin, arpa)
 
     if len(sys.argv) == 2:
@@ -28,4 +30,4 @@ if __name__ == "__main__":
         elif sys.argv[1] == "test":
             SuoritusTestaus()
         sys.exit(0)
-    GUI(ohjelma, tiedostonlukija, konsoli)
+    GUI(ohjelma, tiedostonlukija, konsoli, gutenberg_lukija)

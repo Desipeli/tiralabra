@@ -5,16 +5,22 @@ from tkinter import filedialog, simpledialog, messagebox
 from ohjelma import Ohjelma
 from tiedostonlukija import TiedostonLukija
 from konsoli import Konsoli
+from gutenberg_lukija import GutenbergLukija
 
 class GUI:
     """ Graafinen käyttöliittymä """
-    def __init__(self, ohjelma: "Ohjelma", tiedostonlukija: "TiedostonLukija", konsoli: "Konsoli"):
+    def __init__(self,
+        ohjelma: "Ohjelma",
+        tiedostonlukija: "TiedostonLukija",
+        konsoli: "Konsoli",
+        gutenberg_lukija: "GutenbergLukija"):
         """ Konstruktori
 
         """
         self.ohjelma = ohjelma
         self.tiedostonlukija = tiedostonlukija
         self.konsoli = konsoli
+        self.gutenberg = gutenberg_lukija
 
         self.ikkuna = tk.Tk()
         self.ikkuna.rowconfigure(0, minsize=400, weight=1)
@@ -35,8 +41,11 @@ class GUI:
     def luo_toimintokehyksen_osat(self, toimintokehys):
         """ Luodaan ja piirretään GUI:n vasen palkki """
         nappi_lataa = tk.Button(toimintokehys,
-        text="Lataa tiedostoja",
-        command=self.lataa_tiedostoja)
+            text="Lataa tiedostoja",
+            command=self.lataa_paikallisia_tiedostoja)
+        nappi_gutenberg = tk.Button(toimintokehys,
+            text="Lataa Gutenberg",
+            command=self.kysy_gutenberg)
         nappi_aste = tk.Button(toimintokehys, text="Vaihda aste", command=self.vaihda_aste)
         self.teksti_aste = tk.Label(toimintokehys, text="aste: ")
         teksti_triessa_solmuja = tk.Label(toimintokehys, text="Triessä solmuja:")
@@ -55,19 +64,20 @@ class GUI:
             text="Tyhjennä muisti", command=self.tyhjenna_trie)
 
         nappi_lataa.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
-        self.teksti_aste.grid(row=1, column=0, sticky="ew", padx=5)
-        nappi_aste.grid(row=2, column=0, sticky="ew", padx=5)
-        teksti_triessa_solmuja.grid(row=3, column=0, sticky="ew", padx=5)
-        self.teksti_solmut.grid(row=4, column=0, sticky="ew", padx=5)
-        nappi_lause.grid(row=5, column=0, sticky="ew", padx=5)
-        tarinan_pituus.grid(row=6, column=0, sticky="ew", padx=5)
-        self.input_tarinan_pituus.grid(row=7, column=0, sticky="ew", padx=5)
-        nappi_tarina.grid(row=8, column=0, sticky="ew", padx=5)
-        nappi_kopioi.grid(row=9, column=0, sticky="ew", padx=5)
-        nappi_tyhjenna.grid(row=10, column=0, sticky="ew", padx=5)
-        nappi_tyhjenna_trie.grid(row=11, column=0, sticky="ew", padx=5)
+        nappi_gutenberg.grid(row=1, column=0, sticky="ew", padx=5, pady=5)
+        self.teksti_aste.grid(row=2, column=0, sticky="ew", padx=5)
+        nappi_aste.grid(row=3, column=0, sticky="ew", padx=5)
+        teksti_triessa_solmuja.grid(row=4, column=0, sticky="ew", padx=5)
+        self.teksti_solmut.grid(row=5, column=0, sticky="ew", padx=5)
+        nappi_lause.grid(row=6, column=0, sticky="ew", padx=5)
+        tarinan_pituus.grid(row=7, column=0, sticky="ew", padx=5)
+        self.input_tarinan_pituus.grid(row=8, column=0, sticky="ew", padx=5)
+        nappi_tarina.grid(row=9, column=0, sticky="ew", padx=5)
+        nappi_kopioi.grid(row=10, column=0, sticky="ew", padx=5)
+        nappi_tyhjenna.grid(row=11, column=0, sticky="ew", padx=5)
+        nappi_tyhjenna_trie.grid(row=12, column=0, sticky="ew", padx=5)
 
-    def lataa_tiedostoja(self):
+    def lataa_paikallisia_tiedostoja(self):
         """ Voidaan ladata monta tiedostoa kerralla """
         tiedostojen_nimet = filedialog.askopenfilenames(
             initialdir= os.path.join(os.path.dirname(__file__), "data"),
@@ -164,3 +174,21 @@ class GUI:
         """ Tyhentää trien """
         self.ohjelma.tyhjenna_trie()
         self.paivita_solmut()
+
+    def kysy_gutenberg(self):
+        maara = simpledialog.askinteger(title="Kirjojen määrä",
+            prompt=f"Montako kirjaa ladataan?")
+        if type(maara) == int:
+            print("Aloitetaan kirjojen lataaminen")
+            self.gutenberg.sekoita_kirjalista()
+            for i in range(maara):
+                print(i)
+                self.hae_gutenberg()
+                self.paivita_solmut()
+            print("Valmis")
+
+    def hae_gutenberg(self):
+        kirja = self.gutenberg.hae_kirja()
+        if not kirja:
+            return False
+        return self.ohjelma.lataa_tiedoston_sisalto(kirja)

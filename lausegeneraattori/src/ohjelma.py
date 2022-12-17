@@ -9,7 +9,7 @@ class Ohjelma:
 
     def __init__(self,
         jasennin: "Jasennin",
-        arpa: "Arpa"
+        arpa: "Arpa",
     ):
         """
         Konstruktori
@@ -17,6 +17,7 @@ class Ohjelma:
         Parametrit:
             jasennin: datan muuttaminen sopivaan muotoon
             arpa: satunnaislukugeneraattori
+            gutenberg_lukija: Gutenberg-projektin kirjojen hakeminen netistä
         """
         self._trie = Trie(arpa)
         self._jasennin = jasennin
@@ -57,6 +58,7 @@ class Ohjelma:
         """
         if sisalto:
             lista = self._jasennin.jasenna_listaksi(sisalto)
+            lista = self._jasennin.poista_gutenberg(lista)
             return self._pilko_ja_laheta_trielle(lista)
         return False
 
