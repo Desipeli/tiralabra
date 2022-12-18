@@ -146,6 +146,13 @@ class TestOhjelma(unittest.TestCase):
         print(lause)
         self.assertEqual(lause, "hii huu.")
 
+    def test_lause_kahdesta_eri_tiedostosta(self):
+        self.ohjelma.vaihda_aste(2)
+        self.ohjelma.lataa_tiedoston_sisalto("kerran synkkä ja")
+        self.ohjelma.lataa_tiedoston_sisalto("Olipa kerran synkkä")
+        lause = self.ohjelma.lauseen_muodostuksen_aloitus("", 3)
+        print(lause)
+        self.assertEqual(lause, "Olipa kerran synkkä ja.")
     # Tarina
 
     def test_tarina_trie_tyhja(self):
